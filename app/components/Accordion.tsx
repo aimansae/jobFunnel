@@ -10,12 +10,12 @@ const Accordion = () => {
     setExpanded((prevJobId) => (prevJobId === jobId ? null : jobId));
   };
   return (
-    <section className="w-full h-full">
+    <section className="w-full min-h-[500px] ">
       <ul className="flex flex-col ">
         {jobFunnels.map((job, index) => (
           <li
             key={job.id}
-            className="border p-2 items-center justify-between my-4 "
+            className="border p-3 items-center justify-between my-4 "
           >
             <button
               onClick={() => toggleButton(job.id)}
@@ -47,13 +47,15 @@ const Accordion = () => {
                 opacity: expanded === job.id ? 1 : 0,
               }}
             >
-              <ul className="py-2">
-                {job.questionTrees.map((question) => (
-                  <li className="text-xs sm:text-base my-2" key={question.id}>
-                    <div className="flex flex-row justify-between items-center">
-                      <span className="underline">{question.name}</span>
-                      <span
-                        className={`border px-3 py-1 rounded-full 
+              {" "}
+              <div className="py-2 overflow-y-auto max-h-[200px]">
+                <ul className=" ">
+                  {job.questionTrees.map((question) => (
+                    <li className="text-xs sm:text-base my-3" key={question.id}>
+                      <div className="flex flex-row justify-between items-center">
+                        <span className="underline">{question.name}</span>
+                        <span
+                          className={`border px-3 py-1 rounded-full 
                             ${
                               question.status === "draft"
                                 ? "border-gray-100 bg-gray-200"
@@ -61,13 +63,14 @@ const Accordion = () => {
                                 ? "border-green-100 bg-green-400"
                                 : "bg-gray-100"
                             } `}
-                      >
-                        {question.status}
-                      </span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+                        >
+                          {question.status}
+                        </span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </div>
           </li>
         ))}

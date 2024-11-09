@@ -95,6 +95,13 @@ export const jobFunnels: JobFunnel[] = [
     type: "category",
     questionTrees: [questionTrees[7]],
   },
+  {
+    id: "jf6",
+    name: "Walls",
+    slug: "walls",
+    type: "category",
+    questionTrees: [questionTrees[7]],
+  },
 ];
 
 export const cardHeaderLinks = [
