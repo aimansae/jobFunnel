@@ -4,9 +4,9 @@ import Card from "./components/Card";
 
 const Home = () => {
   return (
-    <div className="flex flex-col justify-center bg-red-300 ">
+    <div className="flex flex-col justify-center">
       <Header />
-      <main className=" md:border-r-gray-400  bg-gray-100 md:flex md:justify-around">
+      <main className="bg-gray-100 md:flex md:justify-around md:border-r-gray-400">
         <Card />
       </main>
     </div>

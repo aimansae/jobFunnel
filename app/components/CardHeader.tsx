@@ -11,13 +11,13 @@ const CardHeader = () => {
   return (
     <header className="border-y p-2 md:p-4">
       <nav>
-        <ul className="flex flex-row  gap-3 sm:gap-4 items-center text-xs sm:text-base sm:text-md">
+        <ul className="sm:text-md flex flex-row items-center gap-3 text-xs sm:gap-4 sm:text-base">
           {cardHeaderLinks.map(({ href, label }) => (
             <li key={href}>
               <Link
                 href={href}
                 className={
-                  currentPath === href ? "text-violet-800 font-bold" : ""
+                  currentPath === href ? "font-bold text-violet-800" : ""
                 }
               >
                 {label}

@@ -4,9 +4,9 @@ import CardHeader from "./CardHeader";
 
 const Card = () => {
   return (
-    <section className="bg-white shadow-lg mt-4 p-4 md:mt-2 md:w-[75vw] overflow-hidden ">
-      <CardHeader></CardHeader>
-      <h1 className="text-lg sm:text-xl font-semibold my-4">List of trees:</h1>
+    <section className="mt-4 overflow-hidden bg-white p-4 shadow-lg md:mt-2 md:w-[75vw]">
+      <CardHeader />
+      <h1 className="my-4 text-lg font-semibold sm:text-xl">List of trees:</h1>
       <Accordion />
     </section>
   );

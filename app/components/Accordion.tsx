@@ -10,24 +10,24 @@ const Accordion = () => {
     setExpanded((prevJobId) => (prevJobId === jobId ? null : jobId));
   };
   return (
-    <section className="w-full min-h-[500px] ">
-      <ul className="flex flex-col ">
+    <section className="min-h-[500px] w-full">
+      <ul className="flex flex-col">
         {jobFunnels.map((job, index) => (
           <li
             key={job.id}
-            className="border p-3 items-center justify-between my-4 "
+            className="my-4 items-center justify-between border p-3"
           >
             <button
               onClick={() => toggleButton(job.id)}
-              className=" flex items-center w-full text-left"
+              className="flex w-full items-center text-left"
               aria-expanded={expanded === job.id}
               aria-controls={`content-${job.id}`}
             >
-              <span className="text-sm sm:text-base font-bold mr-1">
+              <span className="mr-1 text-sm font-bold sm:text-base">
                 {index + 1}.
               </span>
 
-              <span className="text-sm sm:text-base font-bold flex-grow">
+              <span className="flex-grow text-sm font-bold sm:text-base">
                 {job.name}
               </span>
 
@@ -48,21 +48,20 @@ const Accordion = () => {
               }}
             >
               {" "}
-              <div className="py-2 overflow-y-auto max-h-[200px]">
+              <div className="max-h-[200px] overflow-y-auto py-2">
                 <ul className=" ">
                   {job.questionTrees.map((question) => (
-                    <li className="text-xs sm:text-base my-3" key={question.id}>
-                      <div className="flex flex-row justify-between items-center">
+                    <li className="my-3 text-xs sm:text-base" key={question.id}>
+                      <div className="flex flex-row items-center justify-between">
                         <span className="underline">{question.name}</span>
                         <span
-                          className={`border px-3 py-1 rounded-full 
-                            ${
-                              question.status === "draft"
-                                ? "border-gray-100 bg-gray-200"
-                                : question.status === "published"
+                          className={`rounded-full border px-3 py-1 ${
+                            question.status === "draft"
+                              ? "border-gray-100 bg-gray-200"
+                              : question.status === "published"
                                 ? "border-green-100 bg-green-400"
                                 : "bg-gray-100"
-                            } `}
+                          } `}
                         >
                           {question.status}
                         </span>

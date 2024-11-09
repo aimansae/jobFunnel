@@ -14,14 +14,14 @@ const Header = () => {
     setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen);
   };
   return (
-    <header className="p-4 bg-[#4d40ab] text-white  w-full md:flex md:justify-around items-center text-sm">
+    <header className="w-full items-center bg-[#4d40ab] p-4 text-sm text-white md:flex md:justify-evenly">
       {/*Logo*/}
-      <div className="flex items-center justify-between md:mr-6 ">
+      <div className="flex items-center justify-between md:mr-6">
         <Link href={"/"}>
           <Image src={logo} alt="logo" width={70} />
         </Link>
         <button
-          className="flex  text-white text-2xl md:hidden"
+          className="flex text-2xl text-white md:hidden"
           onClick={toggleMenu}
           aria-label="toggle-menu"
         >
@@ -30,7 +30,7 @@ const Header = () => {
       </div>
 
       <ul
-        className={`flex-col md:flex-row md:flex  md:justify-center md:gap-3 space-y-4 md:space-y-0 absolute md:static bg-[#4d40ab] md:bg-transparent w-full md:w-auto left-0 p-4 md:p-0 z-10 transition-transform duration-300 ease-in-out font-bold  ${
+        className={`absolute left-0 z-10 w-full flex-col space-y-4 bg-[#4d40ab] p-4 font-bold transition-transform duration-300 ease-in-out md:static md:flex md:w-auto md:flex-row md:justify-center md:gap-3 md:space-y-0 md:bg-transparent md:p-0 ${
           isMenuOpen ? "flex" : "hidden md:flex"
         }`}
       >
@@ -40,11 +40,6 @@ const Header = () => {
           </li>
         ))}
       </ul>
-      <div className="hidden md:block">
-        <li key={"/"} className="list-none">
-          <Link href={"/"}>Logout</Link>
-        </li>
-      </div>
     </header>
   );
 };
