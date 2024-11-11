@@ -1,18 +1,18 @@
 "use client";
 import { IoIosArrowDown } from "react-icons/io";
-import { jobFunnels } from "@/data";
 import React, { useState } from "react";
+import { JobFunnel } from "@/types";
 
-const Accordion = () => {
+const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
   const [expanded, setExpanded] = useState<string | null>(null);
 
   const toggleButton = (jobId: string) => {
     setExpanded((prevJobId) => (prevJobId === jobId ? null : jobId));
   };
   return (
-    <section className="min-h-[500px] w-full">
+    <section className="min-h-[500px] w-full overflow-hidden bg-white p-4 shadow-lg">
       <ul className="flex flex-col">
-        {jobFunnels.map((job, index) => (
+        {jobs.map((job, index) => (
           <li
             key={job.id}
             className="my-4 items-center justify-between border p-3"
@@ -39,17 +39,20 @@ const Accordion = () => {
             </button>
             <div
               id={`content-${job.id}`}
-              className={`overflow-hidden transition-all duration-500 ${
-                expanded === job.id ? "max-h-[500px]" : "max-h-0"
+              className={`overflow-hidden transition-all duration-200 ${
+                expanded === job.id ? "open opacity-100" : "opacity-0"
               }`}
-              style={{
-                height: expanded === job.id ? "auto" : 0,
-                opacity: expanded === job.id ? 1 : 0,
+              ref={(el: HTMLDivElement | null): void => {
+                if (el && expanded === job.id) {
+                  el.style.maxHeight = `${el.scrollHeight}px`;
+                } else if (el) {
+                  el.style.maxHeight = "0px";
+                }
               }}
             >
               {" "}
-              <div className="max-h-[200px] overflow-y-auto py-2">
-                <ul className=" ">
+              <div className="overflow-y-auto py-2">
+                <ul>
                   {job.questionTrees.map((question) => (
                     <li className="my-3 text-xs sm:text-base" key={question.id}>
                       <div className="flex flex-row items-center justify-between">

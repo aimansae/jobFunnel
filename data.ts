@@ -104,7 +104,7 @@ export const jobFunnels: JobFunnel[] = [
   },
 ];
 
-export const cardHeaderLinks = [
+export const subHeaderLinks = [
   { href: "/", label: "Trees" },
   { href: "/forms", label: "Forms" },
   { href: "/templates", label: "Templates" },
@@ -121,3 +121,76 @@ export const navLinks = [
   { href: "/versions", label: "Versions" },
   { href: "/logout", label: "Logout" },
 ];
+
+export const radioButtons = {
+  categories: {
+    title: "Category Types",
+    options: [
+      {
+        id: "service",
+        value: "service",
+        label: "Service",
+      },
+      {
+        id: "cluster",
+        value: "cluster",
+        label: "Cluster",
+      },
+      {
+        id: "partnership",
+        value: "partnership",
+        label: "Partnership",
+      },
+    ],
+  },
+  statuses: {
+    title: "Status",
+    options: [
+      {
+        id: "draft",
+        value: "draft",
+        label: "Draft",
+      },
+      {
+        id: "ready",
+        value: "ready",
+        label: "Ready to be published",
+      },
+      {
+        id: "published",
+        value: "published",
+        label: "Published",
+      },
+      {
+        id: "archive",
+        value: "archive",
+        label: "Archive",
+      },
+    ],
+  },
+  countries: {
+    title: "Countries",
+    options: [
+      {
+        id: "us",
+        value: "USA",
+        label: "USA",
+      },
+      {
+        id: "ca",
+        value: "Canada",
+        label: "Canada",
+      },
+      {
+        id: "fr",
+        value: "France",
+        label: "France",
+      },
+      {
+        id: "it",
+        value: "Italy",
+        label: "Italy",
+      },
+    ],
+  },
+};

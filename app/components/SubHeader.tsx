@@ -3,16 +3,16 @@
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
-import { cardHeaderLinks } from "@/data";
+import { subHeaderLinks } from "@/data";
 
-const CardHeader = () => {
+const SubHeader = () => {
   const currentPath = usePathname();
   console.log("current path", currentPath);
   return (
     <header className="border-y p-2 md:p-4">
       <nav>
         <ul className="sm:text-md flex flex-row items-center gap-3 text-xs sm:gap-4 sm:text-base">
-          {cardHeaderLinks.map(({ href, label }) => (
+          {subHeaderLinks.map(({ href, label }) => (
             <li key={href}>
               <Link
                 href={href}
@@ -30,4 +30,4 @@ const CardHeader = () => {
   );
 };
 
-export default CardHeader;
+export default SubHeader;
