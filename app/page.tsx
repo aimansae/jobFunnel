@@ -1,9 +1,12 @@
 import React from "react";
-import { jobFunnels } from "@/data";
+import { jobFunnels, sites } from "@/data";
 import Search from "./components/Search";
 import Accordion from "./components/Accordion";
 import SubHeader from "./components/SubHeader";
 import Filter from "./components/Filter";
+import Duplicate from "./components/Duplicate";
+import { IoMdClose } from "react-icons/io";
+import SelectedFilters from "./components/SelectedFilters";
 
 const Home = ({
   searchParams = {},
@@ -14,32 +17,82 @@ const Home = ({
     typeof searchParams?.search === "string"
       ? searchParams?.search.toLowerCase()
       : "";
+  const category =
+    typeof searchParams?.category === "string"
+      ? searchParams.category.toLowerCase()
+      : "";
+  const status =
+    typeof searchParams?.status === "string"
+      ? searchParams.status.toLowerCase()
+      : "";
 
-  const filteredData = searchQuery
-    ? jobFunnels.filter((job) =>
-        job.name.toLocaleLowerCase().includes(searchQuery),
-      )
-    : jobFunnels;
+  console.log(status, "AAAAAAAAAAAAAAAAAAAAAAAAAAa");
 
+  const country =
+    typeof searchParams?.country === "string"
+      ? searchParams.country.toLowerCase()
+      : "";
+
+  const filteredData = jobFunnels.filter((job) => {
+    const matchesSearch = searchQuery
+      ? job.name.toLowerCase().includes(searchQuery)
+      : true;
+    const matchesCategory = category
+      ? job.type.toLowerCase() === category
+      : true;
+    const matchesStatus = status
+      ? job.questionTrees.some((tree) => tree.status.toLowerCase() === status)
+      : true;
+    const matchesCountry = country
+      ? job.questionTrees.some((tree) =>
+          tree.siteIds?.some((siteId) => {
+            const site = sites.find((site) => site.id === siteId);
+            return site && site.country.toLowerCase() === country.toLowerCase();
+          }),
+        )
+      : true;
+
+    return matchesSearch && matchesCategory && matchesStatus && matchesCountry;
+  });
+
+  console.log("STATUS:", status, category, country, "@@@@@@@@@@@@@@@@@@@@@@");
   return (
-    <div className="flex flex-col justify-center">
+    <div className="min-h flex flex-col justify-center">
       <main className="bg-gray-100 md:flex md:justify-around md:border-r-gray-400">
         <section className="mt-4 overflow-hidden bg-white p-4 shadow-lg md:mt-2 md:w-[75vw]">
           <SubHeader />
-          <div className="my-2 flex items-center justify-between">
-            <h1 className="text-sm font-semibold sm:text-xl md:text-lg">
-              List of trees:
-            </h1>
-            <Search />
-          </div>
-          {filteredData.length === 0 ? (
-            <p>No results found</p>
-          ) : (
-            <div className="grid grid-cols-[1fr_2fr]">
-              <Filter />
-              <Accordion jobs={filteredData} />
+
+          <div className="my-4 grid min-h-screen grid-cols-[0.5fr_2fr] gap-2">
+            <div className="w-[150px] px-1">
+              {/* <Filter /> */}
+
+              <Duplicate />
             </div>
-          )}
+            <div className=" ">
+              <div className="flex flex-col">
+                <div>
+                  <Search />
+                </div>
+                <div>
+                  <SelectedFilters
+                    searchQuery={searchQuery}
+                    category={category}
+                    status={status}
+                    country={country}
+                  />
+                  {filteredData.length === 0 ? (
+                    <div className="my-3 px-2 text-center">
+                      <p className="">No results found</p>
+                    </div>
+                  ) : (
+                    <div className="">
+                      <Accordion jobs={filteredData} />
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
       </main>
     </div>

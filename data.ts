@@ -1,10 +1,10 @@
 import { JobFunnel, QuestionTree, Site } from "./types";
 
 export const sites: Site[] = [
-  { id: "1", name: "Home advisor", country: "USA", language: "en" },
-  { id: "2", name: "Home Stars", country: "Canada", language: "en" },
-  { id: "3", name: "Travaux.com", country: "France", language: "fr" },
-  { id: "3", name: "Instapro.com", country: "Italy", language: "it" },
+  { id: "usa", name: "Home advisor", country: "USA", language: "en" },
+  { id: "canada", name: "Home Stars", country: "Canada", language: "en" },
+  { id: "france", name: "Travaux.com", country: "France", language: "fr" },
+  { id: "italy", name: "Instapro.com", country: "Italy", language: "it" },
 ];
 
 export const questionTrees: QuestionTree[] = [
@@ -12,50 +12,50 @@ export const questionTrees: QuestionTree[] = [
     id: "q1",
     name: "Interior Painting",
     status: "published",
-    siteIds: ["1", "2"],
+    siteIds: ["usa", "canada"],
   },
   {
     id: "q2",
     name: "Remove Cabinets",
     status: "draft",
-    siteIds: ["1", "3"],
+    siteIds: ["usa", "france"],
   },
   {
     id: "q3",
     name: "Bathroom Remodel",
     status: "published",
-    siteIds: ["2", "3"],
+    siteIds: ["canada", "france"],
   },
 
   {
     id: "q4",
     name: "Exterior Painting",
     status: "published",
-    siteIds: ["1", "2"],
+    siteIds: ["usa", "canada"],
   },
   {
     id: "q5",
     name: "Tree plantation",
     status: "published",
-    siteIds: ["1", "2"],
+    siteIds: ["usa", "canada"],
   },
   {
     id: "q6",
     name: "Grass Removal",
     status: "published",
-    siteIds: ["1", "2"],
+    siteIds: ["usa", "canada"],
   },
   {
     id: "q7",
     name: "Shower Installation",
     status: "draft",
-    siteIds: ["2", "3"],
+    siteIds: ["canada", "italy"],
   },
   {
     id: "q8",
     name: "Wallpapering",
     status: "draft",
-    siteIds: ["2", "3"],
+    siteIds: ["france", "italy"],
   },
 ];
 
@@ -97,9 +97,9 @@ export const jobFunnels: JobFunnel[] = [
   },
   {
     id: "jf6",
-    name: "Walls",
-    slug: "walls",
-    type: "category",
+    name: "Doors",
+    slug: "doors",
+    type: "cluster",
     questionTrees: [questionTrees[7]],
   },
 ];
@@ -172,22 +172,22 @@ export const radioButtons = {
     title: "Countries",
     options: [
       {
-        id: "us",
+        id: "usa",
         value: "USA",
         label: "USA",
       },
       {
-        id: "ca",
+        id: "canada",
         value: "Canada",
         label: "Canada",
       },
       {
-        id: "fr",
+        id: "france",
         value: "France",
         label: "France",
       },
       {
-        id: "it",
+        id: "italy",
         value: "Italy",
         label: "Italy",
       },

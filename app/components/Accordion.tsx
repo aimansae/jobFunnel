@@ -1,7 +1,10 @@
 "use client";
 import { IoIosArrowDown } from "react-icons/io";
 import React, { useState } from "react";
-import { JobFunnel } from "@/types";
+import { JobFunnel, QuestionTree } from "@/types";
+import { questionTrees, sites } from "@/data";
+import CountryFlag from "./CountryFlag";
+import { getCountryNames } from "../utils/getData";
 
 const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
   const [expanded, setExpanded] = useState<string | null>(null);
@@ -9,6 +12,7 @@ const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
   const toggleButton = (jobId: string) => {
     setExpanded((prevJobId) => (prevJobId === jobId ? null : jobId));
   };
+
   return (
     <section className="min-h-[500px] w-full overflow-hidden bg-white p-4 shadow-lg">
       <ul className="flex flex-col">
@@ -68,6 +72,15 @@ const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
                         >
                           {question.status}
                         </span>
+                        <div className="flex gap-2">
+                          {getCountryNames(question.siteIds ?? []).map(
+                            (country, i) => (
+                              <span key={i}>
+                                <CountryFlag country={country} />
+                              </span>
+                            ),
+                          )}
+                        </div>
                       </div>
                     </li>
                   ))}
