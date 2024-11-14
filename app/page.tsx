@@ -1,12 +1,11 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import { jobFunnels, sites } from "@/data";
 import Search from "./components/Search";
 import Accordion from "./components/Accordion";
 import SubHeader from "./components/SubHeader";
-import Filter from "./components/Filter";
-import Duplicate from "./components/Duplicate";
-import { IoMdClose } from "react-icons/io";
 import SelectedFilters from "./components/SelectedFilters";
+import Filter from "./components/Filter";
+import Loading from "./loading";
 
 const Home = ({
   searchParams = {},
@@ -25,8 +24,6 @@ const Home = ({
     typeof searchParams?.status === "string"
       ? searchParams.status.toLowerCase()
       : "";
-
-  console.log(status, "AAAAAAAAAAAAAAAAAAAAAAAAAAa");
 
   const country =
     typeof searchParams?.country === "string"
@@ -55,7 +52,6 @@ const Home = ({
     return matchesSearch && matchesCategory && matchesStatus && matchesCountry;
   });
 
-  console.log("STATUS:", status, category, country, "@@@@@@@@@@@@@@@@@@@@@@");
   return (
     <div className="min-h flex flex-col justify-center">
       <main className="bg-gray-100 md:flex md:justify-around md:border-r-gray-400">
@@ -64,9 +60,7 @@ const Home = ({
 
           <div className="my-4 grid min-h-screen grid-cols-[0.5fr_2fr] gap-2">
             <div className="w-[150px] px-1">
-              {/* <Filter /> */}
-
-              <Duplicate />
+              <Filter />
             </div>
             <div className=" ">
               <div className="flex flex-col">
@@ -85,9 +79,11 @@ const Home = ({
                       <p className="">No results found</p>
                     </div>
                   ) : (
-                    <div className="">
-                      <Accordion jobs={filteredData} />
-                    </div>
+                    <Suspense fallback={<Loading />}>
+                      <div>
+                        <Accordion jobs={filteredData} />
+                      </div>
+                    </Suspense>
                   )}
                 </div>
               </div>
