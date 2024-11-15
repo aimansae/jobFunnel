@@ -24,11 +24,11 @@ const SelectedFilters = ({
   if (searchQuery && visibleFilters.searchQuery)
     filters.push({ label: `search: ${searchQuery}`, key: "searchQuery" });
   if (category && visibleFilters.category)
-    filters.push({ label: `category: ${category}`, key: "category" });
+    filters.push({ label: ` ${category}`, key: "category" });
   if (status && visibleFilters.status)
-    filters.push({ label: `status: ${status}`, key: "status" });
+    filters.push({ label: ` ${status}`, key: "status" });
   if (country && visibleFilters.country)
-    filters.push({ label: `country: ${country}`, key: "country" });
+    filters.push({ label: ` ${country}`, key: "country" });
 
   const handleRemoveFilter = (filterKey: string) => {
     setVisibleFilters((prevFilters) => ({
@@ -48,7 +48,7 @@ const SelectedFilters = ({
             key={index}
             className="flex items-center gap-2 rounded-md border bg-[#E8DEF8] px-4 py-2"
           >
-            <span>{filter.key}</span>{" "}
+            <span>{filter.label}</span>{" "}
             <button>
               <IoMdClose
                 size={18}

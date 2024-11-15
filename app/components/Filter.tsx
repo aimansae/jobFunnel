@@ -18,10 +18,14 @@ const Filter = () => {
     country: searchParams.get("country") || "",
   });
   const [toggleAllFilters, setToggleAllFilters] = useState(true);
-  // const [toggleSelectedFilter, setToggleSelectedFilter] = useState<
-  //   string | null
-  // >(null);
-
+  const [filterIsVisible, setFilterIsVisible] = useState({
+    category: true,
+    status: true,
+    country: true,
+  });
+  const handleFilterVisibility = (id: keyof typeof filterIsVisible) => {
+    setFilterIsVisible((prev) => ({ ...prev, [id]: !prev[id] }));
+  };
   const handleFilterChange = (type: string, value: string) => {
     setFilters((prevFilters) => ({ ...prevFilters, [type]: value }));
   };
@@ -32,7 +36,9 @@ const Filter = () => {
     if (category) params.set("category", category);
     if (status) params.set("status", status);
     if (country) params.set("country", country);
+    console.log("Updated URL Params:", params.toString());
     router.push(`${pathname}?${params.toString()}`);
+    console.log("STATUS", status);
   }, [filters, pathname, router, searchParams]);
 
   return (
@@ -42,12 +48,13 @@ const Filter = () => {
           <BsSliders size={17} className="cursor-pointer text-gray-700" />
           <span className="text-sm font-semibold text-gray-700">Filter</span>
         </div>
-
-        <LuArrowRightFromLine
-          className="ml-2 cursor-pointer text-gray-700"
-          size={16}
-          onClick={() => setToggleAllFilters((prev) => !prev)} // Toggle all filters when clicked
-        />
+        <button onClick={() => setToggleAllFilters((prev) => !prev)}>
+          <LuArrowRightFromLine
+            className="ml-2 cursor-pointer text-gray-700"
+            size={16}
+            // Toggle all filters when clicked
+          />
+        </button>
       </div>
 
       {/* FILTERS */}
@@ -58,50 +65,65 @@ const Filter = () => {
             <div className="space-y-3">
               <Label
                 text={radioButtons.categories.title}
-                onClick={() => console.log("category")} // Expand/collapse category section
+                onClick={() => handleFilterVisibility("category")} // Expand/collapse category section
+                filterIsVisible={filterIsVisible.category}
               />
-              {radioButtons.categories.options.map(({ id, label }) => (
-                <RadioButton
-                  key={id}
-                  id={id}
-                  value={id}
-                  checked={filters.category === id}
-                  onChange={() => handleFilterChange("category", id)} // Update category filter
-                  label={label}
-                />
-              ))}
+              {filterIsVisible["category"] && (
+                <>
+                  {radioButtons.categories.options.map(({ id, label }) => (
+                    <RadioButton
+                      key={id}
+                      id={id}
+                      value={id}
+                      checked={filters.category === id}
+                      onChange={() => handleFilterChange("category", id)} // Update category filter
+                      label={label}
+                    />
+                  ))}
+                </>
+              )}
             </div>
             <div className="space-y-3">
               <Label
                 text={radioButtons.statuses.title}
-                onClick={() => console.log("status")} // Expand/collapse status section
+                onClick={() => handleFilterVisibility("status")}
+                filterIsVisible={filterIsVisible.status}
               />
-              {radioButtons.statuses.options.map(({ id, label }) => (
-                <RadioButton
-                  key={id}
-                  id={id}
-                  value={id}
-                  checked={filters.status === id}
-                  onChange={() => handleFilterChange("status", id)} // Update category filter
-                  label={label}
-                />
-              ))}
+              {filterIsVisible["status"] && (
+                <div>
+                  {radioButtons.statuses.options.map(({ id, label }) => (
+                    <RadioButton
+                      key={id}
+                      id={id}
+                      value={id}
+                      checked={filters.status === id}
+                      onChange={() => handleFilterChange("status", id)} // Update category filter
+                      label={label}
+                    />
+                  ))}
+                </div>
+              )}
             </div>
             <div className="space-y-3">
               <Label
                 text={radioButtons.countries.title}
-                onClick={() => console.log("country")} // Expand/collapse country section
+                onClick={() => handleFilterVisibility("country")} // Expand/collapse country section
+                filterIsVisible={filterIsVisible.country}
               />
-              {radioButtons.countries.options.map(({ id, label }) => (
-                <RadioButton
-                  key={id}
-                  id={id}
-                  value={id}
-                  checked={filters.country === id}
-                  onChange={() => handleFilterChange("country", id)} // Update category filter
-                  label={label}
-                />
-              ))}
+              {filterIsVisible["country"] && (
+                <>
+                  {radioButtons.countries.options.map(({ id, label }) => (
+                    <RadioButton
+                      key={id}
+                      id={id}
+                      value={id}
+                      checked={filters.country === id}
+                      onChange={() => handleFilterChange("country", id)} // Update category filter
+                      label={label}
+                    />
+                  ))}
+                </>
+              )}
             </div>
           </div>
         </div>

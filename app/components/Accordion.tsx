@@ -12,6 +12,7 @@ const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
   const toggleButton = (jobId: string) => {
     setExpanded((prevJobId) => (prevJobId === jobId ? null : jobId));
   };
+  console.log("FilteredJOBSSS,", jobs);
 
   return (
     <section className="min-h-[500px] w-full overflow-hidden bg-white p-4 shadow-lg">

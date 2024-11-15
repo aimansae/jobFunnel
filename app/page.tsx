@@ -24,12 +24,18 @@ const Home = ({
     typeof searchParams?.status === "string"
       ? searchParams.status.toLowerCase()
       : "";
-
+  console.log(searchParams);
   const country =
     typeof searchParams?.country === "string"
       ? searchParams.country.toLowerCase()
       : "";
-
+  console.log(
+    "LOGGGGG",
+    searchParams.status,
+    "CATEGORY",
+    searchParams.category,
+    country,
+  );
   const filteredData = jobFunnels.filter((job) => {
     const matchesSearch = searchQuery
       ? job.name.toLowerCase().includes(searchQuery)

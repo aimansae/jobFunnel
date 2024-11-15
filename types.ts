@@ -37,6 +37,7 @@ export type LabelType = {
   text: string;
   children?: ReactNode;
   onClick: () => void;
+  filterIsVisible: boolean;
 };
 
 export type SelectedFiltersType = {
