@@ -17,6 +17,7 @@ const Filter = () => {
     status: searchParams.get("status") || "",
     country: searchParams.get("country") || "",
   });
+
   const [toggleAllFilters, setToggleAllFilters] = useState(true);
   const [filterIsVisible, setFilterIsVisible] = useState({
     category: true,
@@ -33,16 +34,15 @@ const Filter = () => {
   useEffect(() => {
     const params = new URLSearchParams(searchParams);
     const { category, status, country } = filters;
+
     if (category) params.set("category", category);
     if (status) params.set("status", status);
     if (country) params.set("country", country);
-    console.log("Updated URL Params:", params.toString());
     router.push(`${pathname}?${params.toString()}`);
-    console.log("STATUS", status);
   }, [filters, pathname, router, searchParams]);
 
   return (
-    <div className="">
+    <>
       <div className="flex items-center justify-between py-2">
         <div className="flex items-center gap-2">
           <BsSliders size={17} className="cursor-pointer text-gray-700" />
@@ -90,7 +90,7 @@ const Filter = () => {
                 filterIsVisible={filterIsVisible.status}
               />
               {filterIsVisible["status"] && (
-                <div>
+                <>
                   {radioButtons.statuses.options.map(({ id, label }) => (
                     <RadioButton
                       key={id}
@@ -101,7 +101,7 @@ const Filter = () => {
                       label={label}
                     />
                   ))}
-                </div>
+                </>
               )}
             </div>
             <div className="space-y-3">
@@ -111,24 +111,27 @@ const Filter = () => {
                 filterIsVisible={filterIsVisible.country}
               />
               {filterIsVisible["country"] && (
-                <>
-                  {radioButtons.countries.options.map(({ id, label }) => (
-                    <RadioButton
-                      key={id}
-                      id={id}
-                      value={id}
-                      checked={filters.country === id}
-                      onChange={() => handleFilterChange("country", id)} // Update category filter
-                      label={label}
-                    />
+                <div className="flex flex-col space-y-3">
+                  {radioButtons.countries.options.map(({ id, label, site }) => (
+                    <div key={id} className="">
+                      <RadioButton
+                        key={id}
+                        id={id}
+                        value={id}
+                        checked={filters.country === id}
+                        onChange={() => handleFilterChange("country", id)} // Update category filter
+                        flag={label}
+                        label={site}
+                      />
+                    </div>
                   ))}
-                </>
+                </div>
               )}
             </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 

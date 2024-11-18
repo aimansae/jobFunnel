@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { Suspense } from "react";
 import { jobFunnels, sites } from "@/data";
 import Search from "./components/Search";
 import Accordion from "./components/Accordion";
@@ -7,35 +7,32 @@ import SelectedFilters from "./components/SelectedFilters";
 import Filter from "./components/Filter";
 import Loading from "./loading";
 
-const Home = ({
+const Home = async ({
   searchParams = {},
 }: {
   searchParams?: { [key: string]: string | string[] | undefined };
 }) => {
+  const resolvedParams = await Promise.resolve(searchParams);
+
+  console.log("Search Params+++++++++++++:", resolvedParams.status);
+
   const searchQuery =
-    typeof searchParams?.search === "string"
-      ? searchParams?.search.toLowerCase()
+    typeof resolvedParams?.search === "string"
+      ? resolvedParams?.search.toLowerCase()
       : "";
   const category =
-    typeof searchParams?.category === "string"
-      ? searchParams.category.toLowerCase()
+    typeof resolvedParams?.category === "string"
+      ? resolvedParams.category.toLowerCase()
       : "";
   const status =
-    typeof searchParams?.status === "string"
-      ? searchParams.status.toLowerCase()
+    typeof resolvedParams?.status === "string"
+      ? resolvedParams.status.toLowerCase()
       : "";
-  console.log(searchParams);
   const country =
     typeof searchParams?.country === "string"
       ? searchParams.country.toLowerCase()
       : "";
-  console.log(
-    "LOGGGGG",
-    searchParams.status,
-    "CATEGORY",
-    searchParams.category,
-    country,
-  );
+
   const filteredData = jobFunnels.filter((job) => {
     const matchesSearch = searchQuery
       ? job.name.toLowerCase().includes(searchQuery)
@@ -43,9 +40,11 @@ const Home = ({
     const matchesCategory = category
       ? job.type.toLowerCase() === category
       : true;
+
     const matchesStatus = status
       ? job.questionTrees.some((tree) => tree.status.toLowerCase() === status)
       : true;
+
     const matchesCountry = country
       ? job.questionTrees.some((tree) =>
           tree.siteIds?.some((siteId) => {
@@ -65,21 +64,27 @@ const Home = ({
           <SubHeader />
 
           <div className="my-4 grid min-h-screen grid-cols-[0.5fr_2fr] gap-2">
-            <div className="w-[150px] px-1">
-              <Filter />
-            </div>
+            <Suspense>
+              <div className="w-[180] px-1">
+                <Filter />
+              </div>
+            </Suspense>
             <div className=" ">
               <div className="flex flex-col">
+                <Suspense>
+                  <div>
+                    <Search />
+                  </div>
+                </Suspense>
                 <div>
-                  <Search />
-                </div>
-                <div>
-                  <SelectedFilters
-                    searchQuery={searchQuery}
-                    category={category}
-                    status={status}
-                    country={country}
-                  />
+                  <Suspense>
+                    <SelectedFilters
+                      searchQuery={searchQuery}
+                      category={category}
+                      status={status}
+                      country={country}
+                    />
+                  </Suspense>
                   {filteredData.length === 0 ? (
                     <div className="my-3 px-2 text-center">
                       <p className="">No results found</p>

@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 export type QuestionTree = {
   id: string;
   name: string;
-  status: "draft" | "published" | "ready | archive";
+  status: string;
   jobFunnel?: JobFunnel;
   siteIds?: string[];
 };
@@ -29,9 +29,11 @@ export type RadioButtonType = {
   checked: boolean;
   label: string;
   onChange: () => void;
+  flag?: string;
 };
 export type CountryFlagProps = {
   country: string;
+  className?: string;
 };
 export type LabelType = {
   text: string;
@@ -45,5 +47,5 @@ export type SelectedFiltersType = {
   category: string;
   status: string;
   country: string;
-  // onRemoveFilter: (filterName: string) => void;
+   // onRemoveFilter: (filterName: string) => void;
 };

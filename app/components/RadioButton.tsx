@@ -1,5 +1,7 @@
+"use client";
+
 import { RadioButtonType } from "@/types";
-import React from "react";
+import CountryFlag from "./CountryFlag";
 
 const RadioButton = ({
   id,
@@ -7,6 +9,7 @@ const RadioButton = ({
   checked,
   onChange,
   label,
+  flag,
 }: RadioButtonType) => {
   return (
     <div className="flex flex-col space-y-1">
@@ -20,9 +23,14 @@ const RadioButton = ({
           checked={checked}
           onChange={onChange}
         />
+        {flag && (
+          <div className="flex flex-shrink-0">
+            <CountryFlag country={flag} className="" />
+          </div>
+        )}
         <label
           htmlFor={id}
-          className="text-ellipsis whitespace-nowrap text-xs text-gray-700"
+          className={`text-ellipsis whitespace-nowrap ${flag ? "ml-2 text-xs" : "text-sm"} text-gray-700`}
         >
           {label}
         </label>

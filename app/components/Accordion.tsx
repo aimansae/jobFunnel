@@ -1,8 +1,7 @@
 "use client";
 import { IoIosArrowDown } from "react-icons/io";
 import React, { useState } from "react";
-import { JobFunnel, QuestionTree } from "@/types";
-import { questionTrees, sites } from "@/data";
+import { JobFunnel } from "@/types";
 import CountryFlag from "./CountryFlag";
 import { getCountryNames } from "../utils/getData";
 
@@ -71,7 +70,7 @@ const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
                                 : "bg-gray-100"
                           } `}
                         >
-                          {question.status}
+                    {question.status}
                         </span>
                         <div className="flex gap-2">
                           {getCountryNames(question.siteIds ?? []).map(

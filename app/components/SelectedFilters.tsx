@@ -38,7 +38,8 @@ const SelectedFilters = ({
 
     const updatedSearchParams = new URLSearchParams(searchParams.toString());
     updatedSearchParams.delete(filterKey);
-    router.replace(`?${updatedSearchParams.toString()}`);
+
+    router.push(`?${updatedSearchParams.toString()}`);
   };
   return filters.length > 0 ? (
     <div className="w-full p-4 shadow-lg">
@@ -48,13 +49,9 @@ const SelectedFilters = ({
             key={index}
             className="flex items-center gap-2 rounded-md border bg-[#E8DEF8] px-4 py-2"
           >
-            <span>{filter.label}</span>{" "}
-            <button>
-              <IoMdClose
-                size={18}
-                className="cursor:pointer"
-                onClick={() => handleRemoveFilter(filter.key)}
-              />
+            <span>{filter.label}</span>
+            <button onClick={() => handleRemoveFilter(filter.key)}>
+              <IoMdClose size={18} className="cursor:pointer" />
             </button>
           </li>
         ))}

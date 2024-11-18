@@ -1,10 +1,10 @@
 import { JobFunnel, QuestionTree, Site } from "./types";
 
 export const sites: Site[] = [
-  { id: "usa", name: "Home advisor", country: "USA", language: "en" },
-  { id: "canada", name: "Home Stars", country: "Canada", language: "en" },
-  { id: "france", name: "Travaux.com", country: "France", language: "fr" },
-  { id: "italy", name: "Instapro.com", country: "Italy", language: "it" },
+  { id: "usa", name: "homeadvisor.com", country: "USA", language: "en" },
+  { id: "canada", name: "homestars.com", country: "Canada", language: "en" },
+  { id: "france", name: "travaux.com", country: "France", language: "fr" },
+  { id: "italy", name: "instapro.cit", country: "Italy", language: "it" },
 ];
 
 export const questionTrees: QuestionTree[] = [
@@ -175,21 +175,25 @@ export const radioButtons = {
         id: "usa",
         value: "USA",
         label: "USA",
+        site: "homeadvisor.com",
       },
       {
         id: "canada",
         value: "Canada",
         label: "Canada",
+        site: "homestars.com",
       },
       {
         id: "france",
         value: "France",
         label: "France",
+        site: "travaux.it",
       },
       {
         id: "italy",
         value: "Italy",
         label: "Italy",
+        site: "instapro.it",
       },
     ],
   },
