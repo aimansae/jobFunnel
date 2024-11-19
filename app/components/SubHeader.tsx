@@ -9,9 +9,9 @@ const SubHeader = () => {
   const currentPath = usePathname();
   console.log("current path", currentPath);
   return (
-    <header className="border-y p-2 md:p-4">
-      <nav>
-        <ul className="sm:text-md flex flex-row items-center gap-3 text-xs sm:gap-4 sm:text-base">
+    <header className="border-y bg-yellow-300">
+      <nav className="p-4">
+        <ul className="sm:text-md flex items-center justify-between gap-2 text-xs sm:text-base md:justify-start md:gap-4">
           {subHeaderLinks.map(({ href, label }) => (
             <li key={href}>
               <Link

@@ -11,10 +11,9 @@ const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
   const toggleButton = (jobId: string) => {
     setExpanded((prevJobId) => (prevJobId === jobId ? null : jobId));
   };
-  console.log("FilteredJOBSSS,", jobs);
 
   return (
-    <section className="min-h-[500px] w-full overflow-hidden bg-white p-4 shadow-lg">
+    <section className="min-h-screen w-full overflow-hidden bg-white p-4 shadow-lg">
       <ul className="flex flex-col">
         {jobs.map((job, index) => (
           <li
@@ -54,15 +53,14 @@ const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
                 }
               }}
             >
-              {" "}
               <div className="overflow-y-auto py-2">
                 <ul>
                   {job.questionTrees.map((question) => (
                     <li className="my-3 text-xs sm:text-base" key={question.id}>
-                      <div className="flex flex-row items-center justify-between">
+                      <div className="flex flex-row items-center justify-between gap-2 px-1">
                         <span className="underline">{question.name}</span>
                         <span
-                          className={`rounded-full border px-3 py-1 ${
+                          className={`rounded-full border px-1 py-1 text-xs sm:text-sm md:px-3 ${
                             question.status === "draft"
                               ? "border-gray-100 bg-gray-200"
                               : question.status === "published"
@@ -70,7 +68,7 @@ const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
                                 : "bg-gray-100"
                           } `}
                         >
-                    {question.status}
+                          {question.status}
                         </span>
                         <div className="flex gap-2">
                           {getCountryNames(question.siteIds ?? []).map(

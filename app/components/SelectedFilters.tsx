@@ -42,12 +42,12 @@ const SelectedFilters = ({
     router.push(`?${updatedSearchParams.toString()}`);
   };
   return filters.length > 0 ? (
-    <div className="w-full p-4 shadow-lg">
-      <ul className="flex items-center gap-4">
+    <div className="p-2 shadow-lg md:p-4">
+      <ul className="flex flex-col items-center gap-2 md:flex-row">
         {filters.map((filter, index) => (
           <li
             key={index}
-            className="flex items-center gap-2 rounded-md border bg-[#E8DEF8] px-4 py-2"
+            className="flex items-center gap-2 rounded-md border bg-[#E8DEF8] p-1 px-2 md:px-4 md:py-2"
           >
             <span>{filter.label}</span>
             <button onClick={() => handleRemoveFilter(filter.key)}>

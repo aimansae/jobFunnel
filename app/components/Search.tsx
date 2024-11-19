@@ -30,14 +30,14 @@ const Search = () => {
     console.log(search);
   };
   return (
-    <div className="relative mx-4 rounded-3xl border-gray-200 bg-gray-200">
-      <IoMdSearch className="absolute left-3 top-5 -translate-y-1/2 transform text-black" />
+    <div className="relative flex items-center rounded-3xl border-gray-200 bg-gray-200">
+      <IoMdSearch className="absolute left-3 text-black" />
 
       <input
         type="text"
-        className="ml-8 border-gray-200 bg-gray-200 py-2 text-left focus:outline-none"
+        className="w-full rounded-3xl border-gray-200 bg-gray-200 py-2 pl-10 text-left focus:outline-none"
         value={search}
-        placeholder="Search Job"
+        placeholder="Search.."
         onChange={handleSearch}
       />
     </div>
