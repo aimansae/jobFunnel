@@ -19,7 +19,7 @@ const RadioButton = ({
           id={id}
           name={id}
           value={value}
-          className="mr-1 h-3 w-3 cursor-pointer appearance-none rounded border border-gray-400 checked:bg-blue-200"
+          className="mr-1 h-3 w-3 cursor-pointer appearance-none rounded border border-gray-400   checked:bg-blue-200  "
           checked={checked}
           onChange={onChange}
         />
@@ -30,7 +30,7 @@ const RadioButton = ({
         )}
         <label
           htmlFor={id}
-          className={`text-ellipsis whitespace-nowrap ${flag ? "ml-2 text-xs" : "text-sm"} text-gray-700`}
+          className={`text-ellipsis whitespace-nowrap text-xs md:text-sm ${flag ? "ml-2 text-xs" : "text-sm"} text-gray-700`}
         >
           {label}
         </label>

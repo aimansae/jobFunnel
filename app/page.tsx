@@ -6,6 +6,7 @@ import SubHeader from "./components/SubHeader";
 import SelectedFilters from "./components/SelectedFilters";
 import Filter from "./components/Filter";
 import Loading from "./loading";
+import FilterTwo from "./components/FilterTwo";
 
 const Home = async ({
   searchParams = {},
@@ -58,57 +59,43 @@ const Home = async ({
   });
 
   return (
-    <div className="min-h-screen w-full justify-center">
-      <main className="mx-auto items-center md:w-[80vw] md:justify-center md:border-r-gray-400">
-        {/*         <section className="mt-4 overflow-hidden bg-white p-4 shadow-lg md:mt-2 md:w-[75vw]">
-         */}
-        <section className="w-full shadow-lg">
-          <SubHeader />
-          <div className="flex items-center gap-2 p-4 md:flex-row md:items-start">
-            <div className="flex-2 md:w-1/4">
-              <Suspense>
-                <Filter />
-              </Suspense>
-            </div>
-            <div className="flex-1 md:w-3/4">
-              <Suspense>
-                <Search />
-              </Suspense>
-              <div className="hidden md:block">
-                {filteredData.length === 0 ? (
-                  <div className="my-3 min-h-screen bg-white px-2 text-center">
-                    <p className="p-4">No results found..</p>
-                  </div>
-                ) : (
-                  <Suspense fallback={<Loading />}>
-                    <Accordion jobs={filteredData} />
-                  </Suspense>
-                )}{" "}
-              </div>
-            </div>
+    <main className="grid grid-cols-4 items-center md:w-[80vw] md:border-r-gray-400">
+      <section className="col-span-4 md:col-start-2">
+        <SubHeader />
+      </section>
+      <section className="align-center md:col-span-1 md:bg-white">
+        <Suspense>
+          <FilterTwo />
+        </Suspense>
+      </section>
+      <section className="col-span-3 p-4 md:col-span-4 md:col-start-2">
+        <Suspense>
+          <Search />
+        </Suspense>
+      </section>
+
+      <div className="col-span-4 min-h-screen bg-white text-center md:col-span-3 md:col-start-2">
+        {filteredData.length === 0 ? (
+          <p className="text-gray-700">No results found..</p>
+        ) : (
+          <div className="text-center">
+            {filteredData.length}{" "}
+            {filteredData.length === 1 ? "Result" : "Results"} Found{" "}
+            <Suspense>
+              <SelectedFilters
+                searchQuery={searchQuery}
+                category={category}
+                status={status}
+                country={country}
+              />
+            </Suspense>
+            <Suspense fallback={<Loading />}>
+              <Accordion jobs={filteredData} />
+            </Suspense>
           </div>
-          <Suspense>
-            <SelectedFilters
-              searchQuery={searchQuery}
-              category={category}
-              status={status}
-              country={country}
-            />
-          </Suspense>
-          <div className="block md:hidden">
-            {filteredData.length === 0 ? (
-              <div className="my-3 min-h-screen bg-white px-2 text-center">
-                <p className="p-4">No results found..</p>
-              </div>
-            ) : (
-              <Suspense fallback={<Loading />}>
-                <Accordion jobs={filteredData} />
-              </Suspense>
-            )}
-          </div>
-        </section>
-      </main>
-    </div>
+        )}
+      </div>
+    </main>
   );
 };
 

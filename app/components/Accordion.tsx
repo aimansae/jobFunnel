@@ -13,7 +13,7 @@ const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
   };
 
   return (
-    <section className="min-h-screen w-full overflow-hidden bg-white p-4 shadow-lg">
+    <section className="min-h-screen w-full overflow-hidden bg-white px-4 shadow-lg">
       <ul className="flex flex-col">
         {jobs.map((job, index) => (
           <li

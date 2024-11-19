@@ -27,9 +27,10 @@ export type RadioButtonType = {
   id: string;
   value: string;
   checked: boolean;
-  label: string;
+  label?: string;
   onChange: () => void;
   flag?: string;
+  className?: string;
 };
 export type CountryFlagProps = {
   country: string;
@@ -47,5 +48,5 @@ export type SelectedFiltersType = {
   category: string;
   status: string;
   country: string;
-   // onRemoveFilter: (filterName: string) => void;
+  // onRemoveFilter: (filterName: string) => void;
 };

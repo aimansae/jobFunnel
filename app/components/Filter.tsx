@@ -81,12 +81,12 @@ const Filter = () => {
           />
         </button>
       </div>
-      <div
-        className={`md:text:sm md:justify-left absolute left-0 z-10 mt-2 w-full flex-col space-y-4 bg-white p-4 text-xs font-bold transition-transform duration-300 ease-in-out md:static md:flex md:w-auto md:flex-row md:gap-3 md:space-y-0 md:bg-transparent md:p-0 ${toggleMobileFilters ? "flex" : "hidden md:flex"}`}
-      >
+      <div className={`bg-yellow-400`}>
+        {/*        className={`md:text:sm md:justify-left absolute left-0 z-10 mt-2 w-full flex-col space-y-4 bg-purple-400 p-4 text-xs font-bold transition-transform duration-300 ease-in-out md:static md:flex md:w-auto md:flex-row md:gap-3 md:space-y-0 md:bg-red-300 md:p-0 ${toggleMobileFilters ? "flex" : "hidden md:flex"}`}
+         */}
         {toggleMobileFilters ||
           (toggleAllFilters && (
-            <div className="bg-gray-100 p-2 md:w-full md:bg-transparent md:px-2">
+            <div className="bg-gray-200 p-2 md:w-full md:bg-transparent md:px-2">
               {/*all filters*/}
               <div className="space-y-4 py-1">
                 <div className="space-y-4">
