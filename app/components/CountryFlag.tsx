@@ -1,6 +1,5 @@
 import React from "react";
 import { CountryFlagProps } from "../../types";
-import Image from "next/image";
 const countryCodes: { [key: string]: string } = {
   USA: "us",
   Canada: "ca",

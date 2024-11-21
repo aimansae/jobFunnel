@@ -4,15 +4,13 @@ import Search from "./components/Search";
 import Accordion from "./components/Accordion";
 import SubHeader from "./components/SubHeader";
 import SelectedFilters from "./components/SelectedFilters";
-import Filter from "./components/Filter";
 import Loading from "./loading";
 import FilterTwo from "./components/FilterTwo";
 
-const Home = async ({
-  searchParams = {},
-}: {
-  searchParams?: { [key: string]: string | string[] | undefined };
+const Home = async (props: {
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) => {
+  const searchParams = await props.searchParams;
   const resolvedParams = await Promise.resolve(searchParams);
   const searchQuery =
     typeof resolvedParams?.search === "string"
