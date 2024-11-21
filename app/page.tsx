@@ -86,10 +86,10 @@ const Home = async (props: {
             category={category}
             status={status}
             country={country}
-          />
+          ></SelectedFilters>
         </Suspense>
         <Suspense fallback={<Loading />}>
-          <Accordion jobs={filteredData} />
+          <Accordion jobs={filteredData}></Accordion>
         </Suspense>
       </div>
     </main>

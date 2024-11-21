@@ -54,16 +54,15 @@ const Filter = () => {
           onClick={mobileFilterView}
           className="z-50 flex items-center gap-2 text-black"
         >
-          {" "}
           {toggleMobileFilters ? (
             <>
-              <BsSliders size={17} className="cursor-pointer" />
-              <span className="hidden md:block">Filter</span>
+              <IoMdClose size={20} className="cursor-pointer" />
+              <span className="text-xs text-gray-700">Close</span>
             </>
           ) : (
             <>
-              <IoMdClose size={20} className="cursor-pointer" />
-              <span className="hidden md:block">Filter</span>
+              <BsSliders size={17} className="cursor-pointer" />
+              <span className="text-xs text-gray-700">Filter</span>
             </>
           )}
         </button>
@@ -75,7 +74,7 @@ const Filter = () => {
           />
         </button>
       </div>
-      {!toggleMobileFilters && (
+      {toggleMobileFilters && (
         <div className="h-min-screen absolute left-0 top-0 z-40 w-[250] bg-gray-200 pt-8 md:bg-transparent">
           {/*all filters*/}
           <div className="p-4">
