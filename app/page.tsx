@@ -14,9 +14,6 @@ const Home = async ({
   searchParams?: { [key: string]: string | string[] | undefined };
 }) => {
   const resolvedParams = await Promise.resolve(searchParams);
-
-  console.log("Search Params+++++++++++++:", resolvedParams.status);
-
   const searchQuery =
     typeof resolvedParams?.search === "string"
       ? resolvedParams?.search.toLowerCase()
@@ -30,8 +27,8 @@ const Home = async ({
       ? resolvedParams.status.toLowerCase()
       : "";
   const country =
-    typeof searchParams?.country === "string"
-      ? searchParams.country.toLowerCase()
+    typeof resolvedParams?.country === "string"
+      ? resolvedParams.country.toLowerCase()
       : "";
 
   const filteredData = jobFunnels.filter((job) => {
@@ -64,36 +61,38 @@ const Home = async ({
         <SubHeader />
       </section>
       <section className="align-center md:col-span-1 md:bg-white">
-        <Suspense>
+        <Suspense fallback={<Loading />}>
           <FilterTwo />
         </Suspense>
       </section>
       <section className="col-span-3 p-4 md:col-span-4 md:col-start-2">
-        <Suspense>
+        <Suspense fallback={<Loading />}>
           <Search />
         </Suspense>
       </section>
 
       <div className="col-span-4 min-h-screen bg-white text-center md:col-span-3 md:col-start-2">
         {filteredData.length === 0 ? (
-          <p className="text-gray-700">No results found..</p>
+          <p className="text-center text-sm text-gray-700">
+            No results found..
+          </p>
         ) : (
-          <div className="text-center">
-            {filteredData.length}{" "}
-            {filteredData.length === 1 ? "Result" : "Results"} Found{" "}
-            <Suspense>
-              <SelectedFilters
-                searchQuery={searchQuery}
-                category={category}
-                status={status}
-                country={country}
-              />
-            </Suspense>
-            <Suspense fallback={<Loading />}>
-              <Accordion jobs={filteredData} />
-            </Suspense>
+          <div className="text-center text-sm">
+            {filteredData.length}
+            {filteredData.length === 1 ? "result" : "results"} found{" "}
           </div>
-        )}
+        )}{" "}
+        <Suspense fallback={<Loading />}>
+          <SelectedFilters
+            searchQuery={searchQuery}
+            category={category}
+            status={status}
+            country={country}
+          />
+        </Suspense>
+        <Suspense fallback={<Loading />}>
+          <Accordion jobs={filteredData} />
+        </Suspense>
       </div>
     </main>
   );
