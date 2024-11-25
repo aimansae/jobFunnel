@@ -5,12 +5,13 @@ import Accordion from "./components/Accordion";
 import SubHeader from "./components/SubHeader";
 import SelectedFilters from "./components/SelectedFilters";
 import Loading from "./loading";
-import FilterTwo from "./components/FilterTwo";
+import Filter from "./components/Filter";
 
 const Home = async (props: {
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) => {
   const searchParams = await props.searchParams;
+  console.log("LOGGING PARAMS", searchParams);
   const resolvedParams = await Promise.resolve(searchParams);
   const searchQuery =
     typeof resolvedParams?.search === "string"
@@ -52,6 +53,11 @@ const Home = async (props: {
 
     return matchesSearch && matchesCategory && matchesStatus && matchesCountry;
   });
+  const isFilterApplied =
+    Boolean(searchQuery) ||
+    Boolean(category) ||
+    Boolean(status) ||
+    Boolean(country);
 
   return (
     <main className="grid grid-cols-4 items-center md:w-[80vw] md:border-r-gray-400">
@@ -60,7 +66,7 @@ const Home = async (props: {
       </section>
       <section className="align-center md:col-span-1 md:bg-white">
         <Suspense fallback={<Loading />}>
-          <FilterTwo />
+          <Filter />
         </Suspense>
       </section>
       <section className="col-span-3 p-4 md:col-span-4 md:col-start-2">
@@ -70,16 +76,18 @@ const Home = async (props: {
       </section>
 
       <div className="col-span-4 min-h-screen bg-white text-center md:col-span-3 md:col-start-2">
-        {filteredData.length === 0 ? (
+        {!isFilterApplied ? (
+          ""
+        ) : filteredData.length === 0 ? (
           <p className="text-center text-sm text-gray-700">
             No results found..
           </p>
         ) : (
-          <div className="text-center text-sm">
+          <div className="text-center text-sm text-gray-700">
             {filteredData.length}
-            {filteredData.length === 1 ? "result" : "results"} found{" "}
+            {filteredData.length === 1 ? " result" : " results "} found.
           </div>
-        )}{" "}
+        )}
         <Suspense fallback={<Loading />}>
           <SelectedFilters
             searchQuery={searchQuery}

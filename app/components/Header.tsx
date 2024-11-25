@@ -30,7 +30,7 @@ const Header = () => {
       </div>
 
       <ul
-        className={`absolute left-0 z-10 w-full flex-col space-y-4 bg-[#4d40ab] p-4 font-bold transition-transform duration-300 ease-in-out md:static md:flex md:w-auto md:flex-row md:justify-center md:gap-3 md:space-y-0 md:bg-transparent md:p-0 ${
+        className={`absolute left-0 z-50 w-full flex-col space-y-4 bg-[#4d40ab] p-4 font-bold transition-transform duration-300 ease-in-out md:static md:flex md:w-auto md:flex-row md:justify-center md:gap-3 md:space-y-0 md:bg-transparent md:p-0 ${
           isMenuOpen ? "flex" : "hidden md:flex"
         }`}
       >

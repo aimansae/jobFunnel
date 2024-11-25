@@ -1,25 +1,25 @@
 "use client";
 
-import { RadioButtonType } from "@/types";
+import { CheckboxType } from "@/types";
 import CountryFlag from "./CountryFlag";
 
-const RadioButton = ({
+const Checkbox = ({
   id,
   value,
   checked,
   onChange,
   label,
   flag,
-}: RadioButtonType) => {
+}: CheckboxType) => {
   return (
     <div className="flex flex-col space-y-1">
       <div className="flex items-start">
         <input
-          type="radio"
+          type="checkbox"
           id={id}
           name={id}
           value={value}
-          className="mr-1 h-3 w-3 cursor-pointer appearance-none rounded border border-gray-400   checked:bg-blue-200  "
+          className="mr-1 h-3 w-3 cursor-pointer appearance-none rounded border border-gray-400 checked:bg-blue-200"
           checked={checked}
           onChange={onChange}
         />
@@ -39,4 +39,4 @@ const RadioButton = ({
   );
 };
 
-export default RadioButton;
+export default Checkbox;

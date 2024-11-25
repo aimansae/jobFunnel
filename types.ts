@@ -23,7 +23,7 @@ export type Site = {
   language: string;
 };
 
-export type RadioButtonType = {
+export type CheckboxType = {
   id: string;
   value: string;
   checked: boolean;

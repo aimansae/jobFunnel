@@ -1,9 +1,9 @@
 "use client";
 
 import { SelectedFiltersType } from "@/types";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
-import { useRouter, useSearchParams } from "next/navigation"; // Import useRouter
+import { useRouter, useSearchParams } from "next/navigation";
 
 const SelectedFilters = ({
   searchQuery,
@@ -11,18 +11,22 @@ const SelectedFilters = ({
   status,
   country,
 }: SelectedFiltersType) => {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
   const [visibleFilters, setVisibleFilters] = useState({
     searchQuery: Boolean(searchQuery),
     category: Boolean(category),
     status: Boolean(status),
     country: Boolean(country),
   });
-  const router = useRouter();
-  const searchParams = useSearchParams(); // Access the current URL search parameters
 
+  const [updatedSearchParams, setUpdatedSearchParams] = useState(
+    new URLSearchParams(searchParams.toString()),
+  );
+  console.log("UPDATED:", updatedSearchParams);
   const filters = [];
-  if (searchQuery && visibleFilters.searchQuery)
-    filters.push({ label: `search: ${searchQuery}`, key: "searchQuery" });
+
   if (category && visibleFilters.category)
     filters.push({ label: ` ${category}`, key: "category" });
   if (status && visibleFilters.status)
@@ -37,13 +41,28 @@ const SelectedFilters = ({
     }));
 
     const updatedSearchParams = new URLSearchParams(searchParams.toString());
+    console.log("FILTER PAGE Current searchParams:", searchParams.toString());
+
     updatedSearchParams.delete(filterKey);
 
     router.push(`?${updatedSearchParams.toString()}`);
   };
+  useEffect(() => {
+    const queryParams = searchParams;
+
+    setVisibleFilters({
+      searchQuery: Boolean(queryParams.get("search")),
+      category: Boolean(queryParams.get("category")),
+      status: Boolean(queryParams.get("status")),
+      country: Boolean(queryParams.get("country")),
+    });
+
+    setUpdatedSearchParams(new URLSearchParams(queryParams.toString()));
+  }, [searchParams]);
+
   return filters.length > 0 ? (
     <div className="p-2 shadow-lg md:p-4">
-      <ul className="flex flex-col items-center gap-2 md:flex-row">
+      <ul className="flex items-center justify-center gap-2">
         {filters.map((filter, index) => (
           <li
             key={index}
