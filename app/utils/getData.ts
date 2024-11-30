@@ -1,4 +1,4 @@
-import { sites } from "@/data";
+import { sites } from "../../data";
 
 export const getCountryNames = (siteIds: string[]): string[] => {
   return siteIds

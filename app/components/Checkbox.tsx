@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckboxType } from "@/types";
+import { CheckboxType } from "../../types";
 import CountryFlag from "./CountryFlag";
 
 const Checkbox = ({
@@ -13,7 +13,7 @@ const Checkbox = ({
 }: CheckboxType) => {
   return (
     <div className="flex flex-col space-y-1">
-      <div className="flex items-start">
+      <div className="flex items-center">
         <input
           type="checkbox"
           id={id}

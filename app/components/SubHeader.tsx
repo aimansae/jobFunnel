@@ -3,11 +3,9 @@
 import Link from "next/link";
 import React from "react";
 import { usePathname } from "next/navigation";
-import { subHeaderLinks } from "@/data";
+import { subHeaderLinks } from "../../data";
 
 const SubHeader = () => {
-  const currentPath = usePathname();
-  console.log("current path", currentPath);
   return (
     <header data-testid="subheader" className="border-y">
       <nav className="p-4">
@@ -16,9 +14,7 @@ const SubHeader = () => {
             <li key={href}>
               <Link
                 href={href}
-                className={
-                  currentPath === href ? "font-bold text-violet-800" : ""
-                }
+                className="font-bold text-violet-800 hover:text-black"
               >
                 {label}
               </Link>

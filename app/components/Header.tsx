@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { CiMenuBurger } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
-import { navLinks } from "@/data";
+import { navLinks } from "../../data";
 import Image from "next/image";
 import logo from "../../public/assets/logo.png";
 
@@ -14,7 +14,7 @@ const Header = () => {
     setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen);
   };
   return (
-    <header className="w-full items-center bg-[#4d40ab] p-4 text-sm text-white md:flex md:items-start md:justify-evenly">
+    <header className="w-full max-w-screen-lg items-center bg-[#4d40ab] p-4 text-sm text-white md:flex md:items-center md:justify-evenly">
       {/*Logo*/}
       <div className="flex items-center justify-between md:mr-6">
         <Link href={"/"}>

@@ -106,20 +106,20 @@ export const jobFunnels: JobFunnel[] = [
 
 export const subHeaderLinks = [
   { href: "/", label: "Trees" },
-  { href: "/forms", label: "Forms" },
-  { href: "/templates", label: "Templates" },
-  { href: "/editor", label: "Editor" },
+  { href: "/", label: "Forms" },
+  { href: "/", label: "Templates" },
+  { href: "/", label: "Editor" },
 ];
 
 export const navLinks = [
-  { href: "/qte", label: "  QTE" },
-  { href: "/services", label: "Services" },
-  { href: "/professions", label: "Professions" },
-  { href: "/topic-cluster", label: "Topic Cluster" },
-  { href: "/job-funnel", label: "Job Funnel" },
-  { href: "/price-rules", label: "Price Rules" },
-  { href: "/versions", label: "Versions" },
-  { href: "/logout", label: "Logout" },
+  { href: "/", label: "  QTE" },
+  { href: "/", label: "Services" },
+  { href: "/", label: "Professions" },
+  { href: "/", label: "Topic Cluster" },
+  { href: "/", label: "Job Funnel" },
+  { href: "/", label: "Price Rules" },
+  { href: "/", label: "Versions" },
+  { href: "/", label: "Logout" },
 ];
 
 export const radioButtons = {

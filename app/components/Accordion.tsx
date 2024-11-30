@@ -1,7 +1,7 @@
 "use client";
 import { IoIosArrowDown } from "react-icons/io";
 import React, { useState } from "react";
-import { JobFunnel } from "@/types";
+import { JobFunnel } from "../../types";
 import CountryFlag from "./CountryFlag";
 import { getCountryNames } from "../utils/getData";
 
@@ -17,15 +17,15 @@ const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
       <ul className="flex flex-col">
         {jobs.map((job, index) => (
           <li
+            onClick={() => toggleButton(job.id)}
             key={job.id}
-            className="my-4 items-center justify-between border p-3"
+            className={`my-4 cursor-pointer items-center justify-between border p-3 ${
+              expanded === job.id ? "bg-gray-100" : ""
+            }`}
+            aria-expanded={expanded === job.id}
+            aria-controls={`content-${job.id}`}
           >
-            <button
-              onClick={() => toggleButton(job.id)}
-              className="flex w-full items-center text-left"
-              aria-expanded={expanded === job.id}
-              aria-controls={`content-${job.id}`}
-            >
+            <div className="flex w-full items-center text-left">
               <span className="mr-1 text-sm font-bold sm:text-base">
                 {index + 1}.
               </span>
@@ -39,7 +39,7 @@ const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
                   expanded === job.id ? "rotate-180" : ""
                 }`}
               />
-            </button>
+            </div>
             <div
               id={`content-${job.id}`}
               className={`overflow-hidden transition-all duration-200 ${
@@ -66,7 +66,7 @@ const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
                               : question.status === "published"
                                 ? "border-green-100 bg-green-400"
                                 : "bg-gray-100"
-                          } `}
+                          }`}
                         >
                           {question.status}
                         </span>

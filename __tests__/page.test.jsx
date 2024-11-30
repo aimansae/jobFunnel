@@ -1,18 +1,25 @@
 import "@testing-library/jest-dom";
 import React from "react";
-import { render, screen } from "@testing-library/react";
-import Homepage from "../app/page";
-import { act } from "react";
+import Home from "../app/page";
+import { render, screen, act } from "@testing-library/react";
+//mock data
+jest.mock("@/components/SubHeader", () => () => <div>Mocked SubHeader</div>);
 
-describe("Home Page", () => {
-  it("renders SubHeader component", async () => {
-    render(<Homepage searchParams={{}} />);
+describe("Home Component", () => {
+  it("renders SubHeader", async () => {
+    // Mock props to pass to the Home component
+    const mockSearchParams = Promise.resolve({
+      search: "painting",
+      category: "service",
+      status: "published",
+      country: "usa",
+    });
 
-    // Use await to find the subheader element
-    const heading = screen
-      .getByRole("heading", { name: /page/i })
-      // Check if the element is in the document
-      .expect(heading)
-      .toBeInTheDocument();
+    // Render the Home component
+    await render(<Home searchParams={mockSearchParams} />);
+
+    // Verify that SubHeader is rendered
+    const subHeaderElement = await screen.findByText("Mocked SubHeader");
+    expect(subHeaderElement).toBeInTheDocument();
   });
 });

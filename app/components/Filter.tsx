@@ -1,17 +1,14 @@
 "use client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-import RadioButton from "./Checkbox";
-import { radioButtons } from "@/data";
+import Checkbox from "./Checkbox";
+import { radioButtons } from "../../data";
 import { BsSliders } from "react-icons/bs";
 import { LuArrowRightFromLine } from "react-icons/lu";
 import Label from "./Label";
 import { IoMdClose } from "react-icons/io";
-type FiltersType = {
-  category: string;
-  status: string;
-  country: string;
-};
+import { FiltersType } from "../../types";
+
 const Filter = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -20,7 +17,9 @@ const Filter = () => {
   const [filters, setFilters] = useState({
     category: searchParams.get("category") || "",
     status: searchParams.get("status") || "",
-    country: searchParams.get("country") || "",
+    country: searchParams.get("country")
+      ? searchParams.get("country")!.split(",")
+      : [], // Decode countries from URL
   });
 
   const [toggleMobileFilters, setToggleMobileFilters] = useState(false);
@@ -30,14 +29,27 @@ const Filter = () => {
     status: true,
     country: true,
   });
+
   const handleFilterVisibility = (id: keyof typeof filterIsVisible) => {
     setFilterIsVisible((prev) => ({ ...prev, [id]: !prev[id] }));
   };
+
   const handleFilterChange = (type: keyof FiltersType, value: string) => {
-    setFilters((prevFilters) => ({
-      ...prevFilters,
-      [type]: prevFilters[type] === value ? "" : value,
-    }));
+    setFilters((prevFilters) => {
+      if (type === "country") {
+        const countryArray = prevFilters.country as string[];
+        console.log(countryArray);
+        const updatedCountries = countryArray.includes(value)
+          ? countryArray.filter((item) => item !== value)
+          : [...countryArray, value];
+        return { ...prevFilters, country: updatedCountries };
+      }
+
+      return {
+        ...prevFilters,
+        [type]: prevFilters[type] === value ? "" : value,
+      };
+    });
   };
 
   const mobileFilterView = () => {
@@ -49,7 +61,9 @@ const Filter = () => {
 
     const category = params.get("category") || "";
     const status = params.get("status") || "";
-    const country = params.get("country") || "";
+    const country = params.get("country")
+      ? params.get("country")!.split(",")
+      : [];
 
     setFilters({ category, status, country });
   }, [searchParams]);
@@ -69,10 +83,8 @@ const Filter = () => {
     } else {
       params.delete("status");
     }
-    if (country) {
-      params.set("country", country);
-    } else {
-      params.delete("country");
+    if (country.length > 0) {
+      params.set("country", country.join(","));
     }
     router.push(`${pathname}?${params.toString()}`);
   }, [filters, pathname, router]);
@@ -118,7 +130,7 @@ const Filter = () => {
               {filterIsVisible.category && (
                 <>
                   {radioButtons.categories.options.map(({ id, label }) => (
-                    <RadioButton
+                    <Checkbox
                       key={id}
                       id={id}
                       value={id}
@@ -141,7 +153,7 @@ const Filter = () => {
               {filterIsVisible.status && (
                 <>
                   {radioButtons.statuses.options.map(({ id, label }) => (
-                    <RadioButton
+                    <Checkbox
                       key={id}
                       id={id}
                       value={id}
@@ -165,10 +177,10 @@ const Filter = () => {
                 <div className="flex flex-col gap-2 space-y-3">
                   {radioButtons.countries.options.map(({ id, label }) => (
                     <div key={id}>
-                      <RadioButton
+                      <Checkbox
                         id={id}
                         value={id}
-                        checked={filters.country === id}
+                        checked={(filters.country as string[]).includes(id)}
                         onChange={() => handleFilterChange("country", id)}
                         flag={label}
                       />
@@ -178,7 +190,6 @@ const Filter = () => {
               )}
             </div>
           </div>
-          <input className="f" type="checkbox" />
         </div>
       )}
     </div>

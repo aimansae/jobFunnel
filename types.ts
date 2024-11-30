@@ -50,3 +50,9 @@ export type SelectedFiltersType = {
   country: string;
   // onRemoveFilter: (filterName: string) => void;
 };
+
+export type FiltersType = {
+  category: string;
+  status: string;
+  country: string;
+};
