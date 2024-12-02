@@ -14,8 +14,8 @@ const CountryFlag = ({ country }: CountryFlagProps) => {
     <img
       src={`https://flagpedia.net/data/flags/h80/${countryCode}.png`}
       alt={`${country} flag`}
-      width="32"
-      height="24"
+      width="30"
+      height="20"
     />
   );
 };

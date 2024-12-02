@@ -85,8 +85,8 @@ const SelectedFilters = ({
   }, [searchParams]);
 
   return filters.length > 0 ? (
-    <div className="p-2 shadow-lg md:p-4">
-      <ul className="flex flex-wrap items-center justify-center gap-2">
+    <div className="p-1 shadow-lg md:p-4">
+      <ul className="flex flex-wrap items-center gap-2">
         {filters.map((filter, index) => {
           // If it's a country, split the label into separate spans
           if (filter.key === "country") {
@@ -94,7 +94,7 @@ const SelectedFilters = ({
             return countries.map((country, idx) => (
               <li
                 key={`${index}-${idx}`} // Unique key for each country
-                className="flex items-center gap-1 rounded-md border bg-[#E8DEF8] p-1 md:px-4 md:py-2"
+                className="flex items-center gap-2 rounded-md border bg-gray-200 p-1 px-2 md:px-4 md:py-2"
               >
                 <span>{country}</span>
                 <button
@@ -104,7 +104,7 @@ const SelectedFilters = ({
                 >
                   <IoMdClose
                     size={18}
-                    className="cursor:pointer rounded hover:border hover:border-black"
+                    className="cursor:pointer rounded-full border-2 bg-gray-400 text-white"
                   />
                 </button>
               </li>
@@ -115,13 +115,16 @@ const SelectedFilters = ({
           return (
             <li
               key={index}
-              className="flex items-center gap-2 rounded-md border bg-[#E8DEF8] p-1 px-2 md:px-4 md:py-2"
+              className="flex items-center gap-2 rounded-md border bg-gray-200 p-1 px-2 md:px-4 md:py-2"
             >
               <span>{filter.label}</span>
               <button
                 onClick={() => handleRemoveFilter(filter.key, filter.value)}
               >
-                <IoMdClose size={18} className="cursor:pointer" />
+                <IoMdClose
+                  size={18}
+                  className="cursor:pointer rounded-full border-2 bg-gray-400 text-white"
+                />
               </button>
             </li>
           );

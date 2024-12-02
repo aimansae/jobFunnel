@@ -124,7 +124,7 @@ export const navLinks = [
 
 export const radioButtons = {
   categories: {
-    title: "Category Types",
+    title: "Funnel Type",
     options: [
       {
         id: "service",

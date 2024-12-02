@@ -8,86 +8,21 @@ import { LuArrowRightFromLine } from "react-icons/lu";
 import Label from "./Label";
 import { IoMdClose } from "react-icons/io";
 import { FiltersType } from "../../types";
+import useFilterParams from "@/hooks/useFilterParams";
 
 const Filter = () => {
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-
-  const [filters, setFilters] = useState({
-    category: searchParams.get("category") || "",
-    status: searchParams.get("status") || "",
-    country: searchParams.get("country")
-      ? searchParams.get("country")!.split(",")
-      : [], // Decode countries from URL
-  });
+  const {
+    filters,
+    filterIsVisible,
+    handleFilterChange,
+    handleFilterVisibility,
+  } = useFilterParams();
 
   const [toggleMobileFilters, setToggleMobileFilters] = useState(false);
-
-  const [filterIsVisible, setFilterIsVisible] = useState({
-    category: true,
-    status: true,
-    country: true,
-  });
-
-  const handleFilterVisibility = (id: keyof typeof filterIsVisible) => {
-    setFilterIsVisible((prev) => ({ ...prev, [id]: !prev[id] }));
-  };
-
-  const handleFilterChange = (type: keyof FiltersType, value: string) => {
-    setFilters((prevFilters) => {
-      if (type === "country") {
-        const countryArray = prevFilters.country as string[];
-        console.log(countryArray);
-        const updatedCountries = countryArray.includes(value)
-          ? countryArray.filter((item) => item !== value)
-          : [...countryArray, value];
-        return { ...prevFilters, country: updatedCountries };
-      }
-
-      return {
-        ...prevFilters,
-        [type]: prevFilters[type] === value ? "" : value,
-      };
-    });
-  };
 
   const mobileFilterView = () => {
     setToggleMobileFilters((prev) => !prev);
   };
-
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-
-    const category = params.get("category") || "";
-    const status = params.get("status") || "";
-    const country = params.get("country")
-      ? params.get("country")!.split(",")
-      : [];
-
-    setFilters({ category, status, country });
-  }, [searchParams]);
-
-  useEffect(() => {
-    const params = new URLSearchParams(searchParams);
-    const { category, status, country } = filters;
-
-    if (category) {
-      params.set("category", category);
-    } else {
-      params.delete("category");
-    }
-
-    if (status) {
-      params.set("status", status);
-    } else {
-      params.delete("status");
-    }
-    if (country.length > 0) {
-      params.set("country", country.join(","));
-    }
-    router.push(`${pathname}?${params.toString()}`);
-  }, [filters, pathname, router]);
 
   return (
     <div className="relative p-4 md:m-0">
@@ -99,12 +34,12 @@ const Filter = () => {
           {toggleMobileFilters ? (
             <>
               <IoMdClose size={20} className="cursor-pointer" />
-              <span className="text-xs text-gray-700">Close</span>
+              <span className="text-base text-gray-700">Close</span>
             </>
           ) : (
             <>
               <BsSliders size={17} className="cursor-pointer" />
-              <span className="text-xs text-gray-700">Filter</span>
+              <span className="text-base text-gray-700">Filter</span>
             </>
           )}
         </button>
@@ -119,9 +54,9 @@ const Filter = () => {
       {toggleMobileFilters && (
         <div className="h-min-screen absolute left-0 top-[-10px] z-20 w-[250] bg-gray-200 pt-8 md:bg-transparent">
           {/*all filters*/}
-          <div className="p-4">
-            {/* Category Filter */}
-            <div className="text-sx space-y-3">
+          <div className="my-6 flex flex-col gap-6 p-4">
+            {/* Funnel Filter */}
+            <div className="space-y-4">
               <Label
                 text={radioButtons.categories.title}
                 onClick={() => handleFilterVisibility("category")}
@@ -144,7 +79,7 @@ const Filter = () => {
             </div>
 
             {/* Status Filter */}
-            <div className="space-y-3">
+            <div className="space-y-4">
               <Label
                 text={radioButtons.statuses.title}
                 onClick={() => handleFilterVisibility("status")}
@@ -167,7 +102,7 @@ const Filter = () => {
             </div>
 
             {/* Country Filter */}
-            <div className="space-y-3">
+            <div className="space-y-4">
               <Label
                 text={radioButtons.countries.title}
                 onClick={() => handleFilterVisibility("country")}

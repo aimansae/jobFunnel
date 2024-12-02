@@ -14,9 +14,9 @@ const Header = () => {
     setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen);
   };
   return (
-    <header className="w-full max-w-screen-lg items-center bg-[#4d40ab] p-4 text-sm text-white md:flex md:items-center md:justify-evenly">
+    <header className="w-full items-center bg-[#4d40ab] p-6 text-sm text-white md:flex md:items-center md:justify-evenly">
       {/*Logo*/}
-      <div className="flex items-center justify-between md:mr-6">
+      <div className="flex items-center justify-between">
         <Link href={"/"}>
           <Image src={logo} alt="logo" width={70} />
         </Link>

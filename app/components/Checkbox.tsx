@@ -12,14 +12,14 @@ const Checkbox = ({
   flag,
 }: CheckboxType) => {
   return (
-    <div className="flex flex-col space-y-1">
-      <div className="flex items-center">
+    <div className="flex flex-col">
+      <div className="flex items-center gap-2">
         <input
           type="checkbox"
           id={id}
           name={id}
           value={value}
-          className="mr-1 h-3 w-3 cursor-pointer appearance-none rounded border border-gray-400 checked:bg-blue-200"
+          className="h-4 w-4 cursor-pointer border border-gray-700 bg-white accent-[#4d40ab]"
           checked={checked}
           onChange={onChange}
         />

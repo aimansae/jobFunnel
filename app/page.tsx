@@ -67,8 +67,8 @@ const Home = async (props: {
     return <p>No data found</p>;
   }
   return (
-    <main className="grid grid-cols-4 items-center md:w-[80vw] md:border-r-gray-400">
-      <section className="col-span-4 md:col-start-2">
+    <main className="mt-6 grid grid-cols-4 items-center justify-center border p-6 shadow-lg md:mx-auto md:max-w-screen-lg">
+      <section className="col-span-5 mt-6">
         <SubHeader />
       </section>
       <section className="align-center md:col-span-1 md:bg-white">
