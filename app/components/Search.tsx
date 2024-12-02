@@ -19,7 +19,7 @@ const Search = () => {
       if (search) {
         router.push(`${pathname}?search=${encodeURIComponent(search)}`);
       } else {
-        router.push("/");
+        ("No results found");
       }
     }, 500);
     return () => clearTimeout(timer);

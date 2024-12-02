@@ -24,18 +24,26 @@ const Filter = () => {
     setToggleMobileFilters((prev) => !prev);
   };
 
+  const countFilters = () => {
+    let count = 0;
+    if (filters.category) count++;
+    if (filters.status) count++;
+
+    if (filters.country.length > 0) count++;
+    return count;
+  };
   return (
     <div className="relative p-4 md:m-0">
       <div className="flex items-center justify-between text-left">
         <button
           onClick={mobileFilterView}
-          className="z-40 flex items-center gap-2 text-black"
+          className="z-40 flex items-center gap-2 p-1 text-black"
         >
           {toggleMobileFilters ? (
-            <>
+            <div className="relative">
               <IoMdClose size={20} className="cursor-pointer" />
               <span className="text-base text-gray-700">Close</span>
-            </>
+            </div>
           ) : (
             <>
               <BsSliders size={17} className="cursor-pointer" />
@@ -43,7 +51,11 @@ const Filter = () => {
             </>
           )}
         </button>
-
+        {!toggleMobileFilters && (
+          <span className="absolute left-[5rem] top-[1rem] z-50 rounded-full border bg-violet-500 px-1 text-center text-xs text-white">
+            {countFilters()}
+          </span>
+        )}
         <button onClick={mobileFilterView}>
           <LuArrowRightFromLine
             className="ml-2 hidden cursor-pointer text-gray-700 md:flex"
