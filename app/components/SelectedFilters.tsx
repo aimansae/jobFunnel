@@ -86,7 +86,7 @@ const SelectedFilters = ({
 
   return filters.length > 0 ? (
     <div className="p-1 shadow-lg md:p-4">
-      <ul className="flex flex-wrap items-center gap-2">
+      <ul className="flex flex-wrap items-center gap-2 p-4 md:p-0">
         {filters.map((filter, index) => {
           // If it's a country, split the label into separate spans
           if (filter.key === "country") {

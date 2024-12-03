@@ -37,12 +37,11 @@ const Filter = () => {
       <div className="flex items-center justify-between text-left">
         <button
           onClick={mobileFilterView}
-          className="z-40 flex items-center gap-2 p-1 text-black"
+          className="z-40 flex items-center gap-2 text-black"
         >
           {toggleMobileFilters ? (
-            <div className="relative">
-              <IoMdClose size={20} className="cursor-pointer" />
-              <span className="text-base text-gray-700">Close</span>
+            <div className="relative flex items-center">
+              <IoMdClose size={20} className="text-gray-70 cursor-pointer" />
             </div>
           ) : (
             <>
@@ -51,7 +50,7 @@ const Filter = () => {
             </>
           )}
         </button>
-        {!toggleMobileFilters && (
+        {!toggleMobileFilters && countFilters() > 0 && (
           <span className="absolute left-[5rem] top-[1rem] z-50 rounded-full border bg-violet-500 px-1 text-center text-xs text-white">
             {countFilters()}
           </span>
