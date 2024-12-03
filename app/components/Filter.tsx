@@ -41,7 +41,7 @@ const Filter = () => {
         >
           {toggleMobileFilters ? (
             <div className="relative flex items-center">
-              <IoMdClose size={20} className="text-gray-70 cursor-pointer" />
+              <IoMdClose size={20} className="cursor-pointer text-gray-700" />
             </div>
           ) : (
             <>

@@ -35,6 +35,7 @@ const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
               </span>
 
               <IoIosArrowDown
+                data-testid="arrowIcon"
                 className={`transition-transform duration-200 ${
                   expanded === job.id ? "rotate-180" : ""
                 }`}
@@ -42,8 +43,9 @@ const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
             </div>
             <div
               id={`content-${job.id}`}
+              data-testid={`content-${job.id}`}
               className={`overflow-hidden transition-all duration-200 ${
-                expanded === job.id ? "open opacity-100" : "opacity-0"
+                expanded === job.id ? "opacity-100" : "hidden opacity-0"
               }`}
               ref={(el: HTMLDivElement | null): void => {
                 if (el && expanded === job.id) {
