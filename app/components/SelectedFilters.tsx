@@ -21,6 +21,7 @@ const SelectedFilters = ({
     country: Boolean(country),
   });
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [updatedSearchParams, setUpdatedSearchParams] = useState(
     new URLSearchParams(searchParams.toString()),
   );
