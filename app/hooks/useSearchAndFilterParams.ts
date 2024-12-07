@@ -4,10 +4,11 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FiltersType } from "../../types";
 
-const useFilterParams = () => {
+const useSearchAndFilterParams = () => {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const [search, setSearch] = useState(searchParams.get("search") || "");
 
   const [filters, setFilters] = useState({
     category: searchParams.get("category") || "",
@@ -32,6 +33,7 @@ const useFilterParams = () => {
         : [],
     };
     setFilters(updatedFilters);
+    setSearch(searchParams.get("search") || "");
   }, [searchParams]);
 
   const handleFilterVisibility = (id: keyof typeof filterIsVisible) => {
@@ -54,6 +56,10 @@ const useFilterParams = () => {
     });
   };
 
+  const handleSearchChange = (value: string) => {
+    setSearch(value);
+  };
+
   useEffect(() => {
     const params = new URLSearchParams();
 
@@ -70,15 +76,19 @@ const useFilterParams = () => {
     if (country.length > 0) {
       params.set("country", country.join(","));
     }
+
+    if (search) params.set("search", search);
     router.push(`${pathname}?${params.toString()}`);
-  }, [filters, pathname, router]);
+  }, [filters, pathname, router, search]);
 
   return {
     filters,
     filterIsVisible,
     handleFilterChange,
     handleFilterVisibility,
+    handleSearchChange,
+    search,
   };
 };
 
-export default useFilterParams;
+export default useSearchAndFilterParams;

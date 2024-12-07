@@ -112,7 +112,7 @@ export const subHeaderLinks = [
 ];
 
 export const navLinks = [
-  { href: "/", label: "  QTE" },
+  { href: "/", label: "QTE" },
   { href: "/", label: "Services" },
   { href: "/", label: "Professions" },
   { href: "/", label: "Topic Cluster" },

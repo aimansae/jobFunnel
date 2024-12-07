@@ -1,14 +1,12 @@
 "use client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Checkbox from "./Checkbox";
 import { radioButtons } from "../../data";
 import { BsSliders } from "react-icons/bs";
 import { LuArrowRightFromLine } from "react-icons/lu";
 import Label from "./Label";
 import { IoMdClose } from "react-icons/io";
-import { FiltersType } from "../../types";
-import useFilterParams from "@/hooks/useFilterParams";
+import useFilterParams from "@/hooks/useSearchAndFilterParams";
 
 const Filter = () => {
   const {

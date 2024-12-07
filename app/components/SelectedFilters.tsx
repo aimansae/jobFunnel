@@ -90,10 +90,10 @@ const SelectedFilters = ({
         {filters.map((filter, index) => {
           // If it's a country, split the label into separate spans
           if (filter.key === "country") {
-            const countries = filter.value.split(","); // Split countries if there are multiple
+            const countries = filter.value.split(",");
             return countries.map((country, idx) => (
               <li
-                key={`${index}-${idx}`} // Unique key for each country
+                key={`${index}-${idx}`}
                 className="flex items-center gap-2 rounded-md border bg-gray-200 p-1 px-2 md:px-4 md:py-2"
               >
                 <span>{country}</span>

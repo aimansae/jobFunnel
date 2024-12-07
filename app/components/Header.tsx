@@ -35,7 +35,7 @@ const Header = () => {
         }`}
       >
         {navLinks.map(({ href, label }) => (
-          <li key={href}>
+          <li key={label}>
             <Link href={href}>{label}</Link>
           </li>
         ))}

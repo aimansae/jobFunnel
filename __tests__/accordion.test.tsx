@@ -4,7 +4,7 @@ import "@testing-library/jest-dom";
 import Accordion from "@/components/Accordion";
 import { JobFunnel, QuestionTree } from "../types";
 import userEvent from "@testing-library/user-event";
-import { mock } from "node:test";
+
 const questionTrees: QuestionTree[] = [
   {
     id: "q1",
@@ -26,6 +26,7 @@ const questionTrees: QuestionTree[] = [
     siteIds: ["canada", "france"],
   },
 ];
+
 const mockJobs: JobFunnel[] = [
   {
     id: "jf1",
@@ -44,12 +45,13 @@ const mockJobs: JobFunnel[] = [
 ];
 
 describe("Accordion component", () => {
-  it("renders the jobs", () => {
+  it("renders all the jobs", () => {
     render(<Accordion jobs={mockJobs} />);
     mockJobs.forEach((job) =>
       expect(screen.getByText(job.name)).toBeInTheDocument(),
     );
   });
+
   it("toggles job expansion", async () => {
     render(<Accordion jobs={mockJobs} />);
     const jobOne = screen.getByText("job1");
@@ -58,7 +60,7 @@ describe("Accordion component", () => {
     // expand job1 content
     await userEvent.click(jobOne);
     await waitFor(() => expect(jobOneContent).toHaveClass("opacity-100"));
-    // toggle job1 content
+    // close job1 content
     await userEvent.click(jobOne);
     await waitFor(() => expect(jobOneContent).toHaveClass("hidden"));
   });
@@ -67,7 +69,9 @@ describe("Accordion component", () => {
     render(<Accordion jobs={mockJobs} />);
     const arrowIcons = screen.getAllByTestId("arrowIcon");
     expect(arrowIcons.length).toBe(mockJobs.length);
-    // Before click: check initial state
+
+    // Before click
+
     expect(arrowIcons[0]).not.toHaveClass("rotate-180");
     await userEvent.click(arrowIcons[0]);
     expect(arrowIcons[0]).toHaveClass("rotate-180");
@@ -78,17 +82,17 @@ describe("Accordion component", () => {
     screen.debug();
     const jobOne = screen.getByText("job1");
     const jobOneContent = screen.getByTestId("content-jf1");
+    // Mock scrollHeight
     Object.defineProperty(HTMLElement.prototype, "scrollHeight", {
       configurable: true,
       get() {
-        return 100; // Mocked scrollHeight for testing
+        return 100;
       },
     });
 
-    // Initial state: maxHeight should be 0px
+    // Initial maxHeight should be 0px
     expect(jobOneContent.style.maxHeight).toBe("0px");
 
-    // Click to expand
     await userEvent.click(jobOne);
 
     // Ensure maxHeight is set to the scrollHeight (100px)
@@ -102,6 +106,7 @@ describe("Accordion component", () => {
       expect(jobOneContent.style.maxHeight).toBe("0px");
     });
   });
+
   it("expands one job at a time", async () => {
     render(<Accordion jobs={mockJobs} />);
     const jobOne = screen.getByText("job1");

@@ -11,6 +11,7 @@ const CountryFlag = ({ country }: CountryFlagProps) => {
   const countryCode = countryCodes[country] || "us"; // Default to "us" if country code is not found
 
   return (
+    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={`https://flagpedia.net/data/flags/h80/${countryCode}.png`}
       alt={`${country} flag`}

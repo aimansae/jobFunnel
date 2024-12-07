@@ -22,7 +22,6 @@ const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
             className={`my-4 cursor-pointer items-center justify-between border p-3 ${
               expanded === job.id ? "bg-gray-100" : ""
             }`}
-            aria-expanded={expanded === job.id}
             aria-controls={`content-${job.id}`}
           >
             <div className="flex w-full items-center text-left">
