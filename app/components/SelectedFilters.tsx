@@ -101,7 +101,7 @@ const SelectedFilters = ({
                 <button
                   onClick={() =>
                     handleRemoveFilter(filter.key, filter.value, country)
-                  } // Remove individual country
+                  }
                 >
                   <IoMdClose
                     size={18}
