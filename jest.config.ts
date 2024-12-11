@@ -13,6 +13,7 @@ const config: Config = {
     "^.+\\.(css|scss|sass)$": "identity-obj-proxy",
     // Handle absolute imports and module aliases
     "^@/(.*)$": "<rootDir>/app/$1",
+    "^@hooks/(.*)$": "<rootDir>/hooks/$1",
   },
   transform: {
     "^.+\\.tsx?$": "ts-jest", // Transform TypeScript files using ts-jest

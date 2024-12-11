@@ -122,7 +122,7 @@ export const navLinks = [
   { href: "/", label: "Logout" },
 ];
 
-export const radioButtons = {
+export const CheckBox = {
   categories: {
     title: "Funnel Type",
     options: [

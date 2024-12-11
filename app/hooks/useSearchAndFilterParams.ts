@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FiltersType } from "../../types";
 
 const useSearchAndFilterParams = () => {
@@ -61,24 +61,28 @@ const useSearchAndFilterParams = () => {
   };
 
   useEffect(() => {
-    const params = new URLSearchParams();
+    const timer = setTimeout(() => {
+      const params = new URLSearchParams();
 
-    const { category, status, country } = filters;
+      const { category, status, country } = filters;
 
-    if (category) {
-      params.set("category", category);
-    }
+      if (category) {
+        params.set("category", category);
+      }
 
-    if (status) {
-      params.set("status", status);
-    }
+      if (status) {
+        params.set("status", status);
+      }
 
-    if (country.length > 0) {
-      params.set("country", country.join(","));
-    }
+      if (country.length > 0) {
+        params.set("country", country.join(","));
+      }
 
-    if (search) params.set("search", search);
-    router.push(`${pathname}?${params.toString()}`);
+      if (search) params.set("search", search);
+      router.push(`${pathname}?${params.toString()}`);
+    }, 300);
+
+    return () => clearTimeout(timer);
   }, [filters, pathname, router, search]);
 
   return {

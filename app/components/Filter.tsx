@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import Checkbox from "./Checkbox";
-import { radioButtons } from "../../data";
+import { CheckBox } from "../../data";
 import { BsSliders } from "react-icons/bs";
 import { LuArrowRightFromLine } from "react-icons/lu";
 import Label from "./Label";
 import { IoMdClose } from "react-icons/io";
-import useFilterParams from "@/hooks/useSearchAndFilterParams";
+import useSearchAndFilterParams from "@/hooks/useSearchAndFilterParams";
 
 const Filter = () => {
   const {
@@ -14,9 +14,9 @@ const Filter = () => {
     filterIsVisible,
     handleFilterChange,
     handleFilterVisibility,
-  } = useFilterParams();
+  } = useSearchAndFilterParams();
 
-  const [toggleMobileFilters, setToggleMobileFilters] = useState(false);
+  const [toggleMobileFilters, setToggleMobileFilters] = useState(true);
 
   const mobileFilterView = () => {
     setToggleMobileFilters((prev) => !prev);
@@ -27,29 +27,41 @@ const Filter = () => {
     if (filters.category) count++;
     if (filters.status) count++;
 
-    if (filters.country.length > 0) count++;
+    if (filters.country && filters.country.length > 0) count++;
     return count;
   };
   return (
-    <div className="relative p-4 md:m-0">
+    <div className="relative p-4 md:m-0" data-testid="filter">
       <div className="flex items-center justify-between text-left">
         <button
           onClick={mobileFilterView}
           className="z-40 flex items-center gap-2 text-black"
         >
           {toggleMobileFilters ? (
-            <div className="relative flex items-center">
-              <IoMdClose size={20} className="cursor-pointer text-gray-700" />
+            <div className="relative flex items-center gap-2">
+              <IoMdClose
+                data-testid="icon-close"
+                size={20}
+                className="cursor-pointer border-gray-900 text-gray-700 hover:border"
+              />
+              <span className="text-base text-gray-700">Filter</span>
             </div>
           ) : (
             <>
-              <BsSliders size={17} className="cursor-pointer" />
+              <BsSliders
+                size={17}
+                className="cursor-pointer"
+                data-testid="icon-sliders"
+              />
               <span className="text-base text-gray-700">Filter</span>
             </>
           )}
         </button>
-        {!toggleMobileFilters && countFilters() > 0 && (
-          <span className="absolute left-[5rem] top-[1rem] z-50 rounded-full border bg-violet-500 px-1 text-center text-xs text-white">
+        {countFilters() > 0 && (
+          <span
+            data-testid="filter-count"
+            className="absolute left-[5rem] top-[1rem] z-50 ml-1 rounded-full border bg-violet-500 px-1 text-center text-xs text-white"
+          >
             {countFilters()}
           </span>
         )}
@@ -64,16 +76,16 @@ const Filter = () => {
         <div className="h-min-screen absolute left-0 top-[-10px] z-20 w-[250] bg-gray-200 pt-8 md:bg-transparent">
           {/*all filters*/}
           <div className="my-6 flex flex-col gap-6 p-4">
-            {/* Funnel Filter */}
+            {/* Funnel Type */}
             <div className="space-y-4">
               <Label
-                text={radioButtons.categories.title}
+                text={CheckBox.categories.title}
                 onClick={() => handleFilterVisibility("category")}
                 filterIsVisible={filterIsVisible.category}
               />
               {filterIsVisible.category && (
                 <>
-                  {radioButtons.categories.options.map(({ id, label }) => (
+                  {CheckBox.categories.options.map(({ id, label }) => (
                     <Checkbox
                       key={id}
                       id={id}
@@ -90,13 +102,13 @@ const Filter = () => {
             {/* Status Filter */}
             <div className="space-y-4">
               <Label
-                text={radioButtons.statuses.title}
+                text={CheckBox.statuses.title}
                 onClick={() => handleFilterVisibility("status")}
                 filterIsVisible={filterIsVisible.status}
               />
               {filterIsVisible.status && (
                 <>
-                  {radioButtons.statuses.options.map(({ id, label }) => (
+                  {CheckBox.statuses.options.map(({ id, label }) => (
                     <Checkbox
                       key={id}
                       id={id}
@@ -113,18 +125,20 @@ const Filter = () => {
             {/* Country Filter */}
             <div className="space-y-4">
               <Label
-                text={radioButtons.countries.title}
+                text={CheckBox.countries.title}
                 onClick={() => handleFilterVisibility("country")}
                 filterIsVisible={filterIsVisible.country}
               />
               {filterIsVisible.country && (
                 <div className="flex flex-col gap-2 space-y-3">
-                  {radioButtons.countries.options.map(({ id, label }) => (
+                  {CheckBox.countries.options.map(({ id, label }) => (
                     <div key={id}>
                       <Checkbox
                         id={id}
                         value={id}
-                        checked={(filters.country as string[]).includes(id)}
+                        checked={((filters.country as string[]) || []).includes(
+                          id,
+                        )}
                         onChange={() => handleFilterChange("country", id)}
                         flag={label}
                       />
