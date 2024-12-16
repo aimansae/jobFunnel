@@ -76,7 +76,7 @@ describe("Filter Component", () => {
     expect(screen.getByTestId("icon-sliders")).toBeInTheDocument();
   });
 
-  it("should display filter count when filters are active", () => {
+  it("should display filter count when filters are active", async () => {
     // Mock the hook with active filters
     (useSearchAndFilterParams as jest.Mock).mockReturnValue({
       filters: {
@@ -98,9 +98,9 @@ describe("Filter Component", () => {
     render(<Filter />);
     const toggleButton = screen.getByText("Filter");
     userEvent.click(toggleButton);
-
     // Verify filter count
     const filterCount = screen.getByTestId("filter-count");
+    console.log(filterCount);
     expect(filterCount).toBeInTheDocument();
     expect(filterCount).toHaveTextContent("1");
   });

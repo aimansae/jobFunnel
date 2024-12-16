@@ -1,9 +1,14 @@
 "use client";
-
-import { SelectedFiltersType } from "../../types";
 import React, { useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 import { useRouter, useSearchParams } from "next/navigation";
+
+export type SelectedFiltersType = {
+  searchQuery: string;
+  category: string;
+  status: string;
+  country: string;
+};
 
 const SelectedFilters = ({
   searchQuery,

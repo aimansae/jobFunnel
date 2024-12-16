@@ -2,7 +2,7 @@ import React from "react";
 import { render, screen, waitFor } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Accordion from "@/components/Accordion";
-import { JobFunnel, QuestionTree } from "../types";
+import { JobFunnel, QuestionTree } from "../app/types";
 import userEvent from "@testing-library/user-event";
 
 const questionTrees: QuestionTree[] = [
@@ -60,6 +60,7 @@ describe("Accordion component", () => {
     // expand job1 content
     await userEvent.click(jobOne);
     await waitFor(() => expect(jobOneContent).toHaveClass("opacity-100"));
+
     // close job1 content
     await userEvent.click(jobOne);
     await waitFor(() => expect(jobOneContent).toHaveClass("hidden"));
@@ -71,7 +72,6 @@ describe("Accordion component", () => {
     expect(arrowIcons.length).toBe(mockJobs.length);
 
     // Before click
-
     expect(arrowIcons[0]).not.toHaveClass("rotate-180");
     await userEvent.click(arrowIcons[0]);
     expect(arrowIcons[0]).toHaveClass("rotate-180");
@@ -79,9 +79,10 @@ describe("Accordion component", () => {
 
   it("applies maxHeight during expansion and collapse", async () => {
     render(<Accordion jobs={mockJobs} />);
-    screen.debug();
+
     const jobOne = screen.getByText("job1");
     const jobOneContent = screen.getByTestId("content-jf1");
+
     // Mock scrollHeight
     Object.defineProperty(HTMLElement.prototype, "scrollHeight", {
       configurable: true,
@@ -92,7 +93,6 @@ describe("Accordion component", () => {
 
     // Initial maxHeight should be 0px
     expect(jobOneContent.style.maxHeight).toBe("0px");
-
     await userEvent.click(jobOne);
 
     // Ensure maxHeight is set to the scrollHeight (100px)

@@ -1,9 +1,8 @@
-import { screen, render, waitFor } from "@testing-library/react";
+import { screen, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import Search from "@/components/Search";
 import userEvent from "@testing-library/user-event";
 import useSearchAndFilterParams from "@/hooks/useSearchAndFilterParams";
-import { useRouter } from "next/navigation";
 
 jest.mock("@/hooks/useSearchAndFilterParams", () => ({
   __esModule: true,
@@ -24,6 +23,7 @@ describe("Search component", () => {
     // Clean up after the test
     jest.useRealTimers();
   });
+
   it("should call handleSearchChange with the input value", async () => {
     const mockHandleSearchChange = jest.fn();
 

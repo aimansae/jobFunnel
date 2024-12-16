@@ -1,11 +1,12 @@
 import React, { Suspense } from "react";
-import { jobFunnels, sites } from "../data";
 import Search from "./components/Search";
 import Accordion from "./components/Accordion";
 import SubHeader from "./components/SubHeader";
 import SelectedFilters from "./components/SelectedFilters";
 import Loading from "./loading";
 import Filter from "./components/Filter";
+import { jobFunnels } from "./jobFunnels";
+import { sites } from "./sites";
 
 const Home = async (props: {
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
@@ -48,10 +49,7 @@ const Home = async (props: {
             job.questionTrees.some((tree) =>
               tree.siteIds?.some((siteId) => {
                 const site = sites.find((site) => site.id === siteId);
-                console.log(
-                  `Checking siteId: ${siteId} for country: ${selectedCountry} -> site:`,
-                  site,
-                );
+
                 return (
                   site &&
                   selectedCountry.toLowerCase() === site.country.toLowerCase()
@@ -64,8 +62,9 @@ const Home = async (props: {
     return matchesSearch && matchesCategory && matchesStatus && matchesCountry;
   });
   if (!searchParams) {
-    return <p>No data found</p>;
+    return <p>No results found</p>;
   }
+
   return (
     <main className="mt-6 grid grid-cols-4 items-center justify-center border p-6 shadow-lg md:mx-auto md:max-w-screen-lg">
       <section className="col-span-5 mt-6">
@@ -83,14 +82,15 @@ const Home = async (props: {
       </section>
 
       <div className="col-span-4 min-h-screen bg-white text-center md:col-span-3 md:col-start-2">
-        {searchQuery && filteredData.length === 0 ? (
+        {filteredData.length === 0 ? (
           <p className="text-center text-sm text-gray-700">No results found.</p>
-        ) : searchQuery ? (
+        ) : (
           <div className="text-center text-sm text-gray-700">
-            {filteredData.length}
-            {filteredData.length === 1 ? " result" : " results "} found
+            {filteredData.length === 1
+              ? "1 result found"
+              : `${filteredData.length} results found`}
           </div>
-        ) : null}
+        )}
         <Suspense fallback={<Loading />}>
           <SelectedFilters
             searchQuery={searchQuery}

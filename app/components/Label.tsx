@@ -1,5 +1,11 @@
-import { LabelType } from "../../types";
-import React from "react";
+import React, { ReactNode } from "react";
+
+type LabelType = {
+  text: string;
+  children?: ReactNode;
+  onClick: () => void;
+  filterIsVisible: boolean;
+};
 
 const Label = ({ text, onClick, filterIsVisible }: LabelType) => {
   return (

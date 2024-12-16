@@ -16,17 +16,16 @@ describe("Checkbox component", () => {
 
   it("renders checkbox", () => {
     render(<Checkbox {...mockProps} />);
-    screen.debug();
 
     const checkbox = screen.getByRole("checkbox", {
       name: mockProps.label,
       hidden: true,
     });
+
     expect(checkbox).toBeInTheDocument();
     expect(checkbox).toHaveAttribute("id", mockProps.id);
     expect(checkbox).toHaveAttribute("value", mockProps.value);
     expect(checkbox).not.toBeChecked();
-    screen.debug();
 
     const label = screen.getByText(mockProps.label);
     expect(label).toBeInTheDocument();
@@ -42,6 +41,7 @@ describe("Checkbox component", () => {
       name: mockProps.label,
       hidden: true,
     });
+
     userEvent.click(checkbox);
     expect(mockProps.onChange).toHaveBeenCalledTimes(1);
   });

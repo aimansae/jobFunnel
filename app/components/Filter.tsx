@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import Checkbox from "./Checkbox";
-import { CheckBox } from "../../data";
 import { BsSliders } from "react-icons/bs";
 import { LuArrowRightFromLine } from "react-icons/lu";
 import Label from "./Label";
 import { IoMdClose } from "react-icons/io";
 import useSearchAndFilterParams from "@/hooks/useSearchAndFilterParams";
+import { CheckBox } from "@/checkbox";
 
 const Filter = () => {
   const {
@@ -14,6 +14,7 @@ const Filter = () => {
     filterIsVisible,
     handleFilterChange,
     handleFilterVisibility,
+    countFilters,
   } = useSearchAndFilterParams();
 
   const [toggleMobileFilters, setToggleMobileFilters] = useState(true);
@@ -21,15 +22,8 @@ const Filter = () => {
   const mobileFilterView = () => {
     setToggleMobileFilters((prev) => !prev);
   };
+  console.log("Count FilterSSSs:", countFilters);
 
-  const countFilters = () => {
-    let count = 0;
-    if (filters.category) count++;
-    if (filters.status) count++;
-
-    if (filters.country && filters.country.length > 0) count++;
-    return count;
-  };
   return (
     <div className="relative p-4 md:m-0" data-testid="filter">
       <div className="flex items-center justify-between text-left">
@@ -57,12 +51,12 @@ const Filter = () => {
             </>
           )}
         </button>
-        {countFilters() > 0 && (
+        {countFilters > 0 && (
           <span
             data-testid="filter-count"
-            className="absolute left-[5rem] top-[1rem] z-50 ml-1 rounded-full border bg-violet-500 px-1 text-center text-xs text-white"
+            className="bg-custompurple absolute left-[5rem] top-[1rem] z-50 ml-1 rounded-full border px-1 text-center text-xs text-white"
           >
-            {countFilters()}
+            {countFilters}
           </span>
         )}
         <button onClick={mobileFilterView}>

@@ -1,7 +1,16 @@
 "use client";
 
-import { CheckboxType } from "../../types";
 import CountryFlag from "./CountryFlag";
+
+type CheckboxType = {
+  id: string;
+  value: string;
+  checked: boolean;
+  label?: string;
+  onChange: () => void;
+  flag?: string;
+  className?: string;
+};
 
 const Checkbox = ({
   id,

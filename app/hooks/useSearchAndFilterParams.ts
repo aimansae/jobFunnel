@@ -1,9 +1,8 @@
 "use client";
 
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useState } from "react";
-import { FiltersType } from "../../types";
-
+import { useEffect, useMemo, useState } from "react";
+import { FiltersType } from "../types";
 const useSearchAndFilterParams = () => {
   const router = useRouter();
   const pathname = usePathname();
@@ -59,6 +58,16 @@ const useSearchAndFilterParams = () => {
   const handleSearchChange = (value: string) => {
     setSearch(value);
   };
+  const countFilters = useMemo(() => {
+    let count = 0;
+    if (filters.category) count++;
+    if (filters.status) count++;
+    if (filters.country && Array.isArray(filters.country)) {
+      count += filters.country.length;
+    }
+
+    return count;
+  }, [filters]);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -92,6 +101,7 @@ const useSearchAndFilterParams = () => {
     handleFilterVisibility,
     handleSearchChange,
     search,
+    countFilters,
   };
 };
 

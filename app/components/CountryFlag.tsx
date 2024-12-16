@@ -1,5 +1,10 @@
 import React from "react";
-import { CountryFlagProps } from "../../types";
+
+type CountryFlagTypes = {
+  country: string;
+  className?: string;
+};
+
 const countryCodes: { [key: string]: string } = {
   USA: "us",
   Canada: "ca",
@@ -7,7 +12,7 @@ const countryCodes: { [key: string]: string } = {
   Italy: "it",
 };
 
-const CountryFlag = ({ country }: CountryFlagProps) => {
+const CountryFlag = ({ country }: CountryFlagTypes) => {
   const countryCode = countryCodes[country] || "us"; // Default to "us" if country code is not found
 
   return (

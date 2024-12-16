@@ -12,6 +12,7 @@ describe("Flag component", () => {
       "https://flagpedia.net/data/flags/h80/us.png",
     );
   });
+
   it("defaults to USA if country is not not found", () => {
     render(<CountryFlag country="Germany" />);
     const img = screen.getByAltText(/Germany flag/i);
@@ -20,6 +21,4 @@ describe("Flag component", () => {
       "https://flagpedia.net/data/flags/h80/us.png",
     );
   });
-
-  screen.debug();
 });

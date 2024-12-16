@@ -31,6 +31,7 @@ describe("Header component", () => {
 
     const menuButton = screen.getByLabelText("toggle-menu");
     userEvent.click(menuButton);
+
     const menuItems = screen.getAllByRole("listitem");
     expect(menuItems.length).toBeGreaterThanOrEqual(8);
   });

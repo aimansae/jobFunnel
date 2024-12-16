@@ -4,9 +4,19 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { CiMenuBurger } from "react-icons/ci";
 import { IoMdClose } from "react-icons/io";
-import { navLinks } from "../../data";
 import Image from "next/image";
 import logo from "../../public/assets/logo.png";
+
+export const navLinks = [
+  { href: "/", label: "QTE" },
+  { href: "/", label: "Services" },
+  { href: "/", label: "Professions" },
+  { href: "/", label: "Topic Cluster" },
+  { href: "/", label: "Job Funnel" },
+  { href: "/", label: "Price Rules" },
+  { href: "/", label: "Versions" },
+  { href: "/", label: "Logout" },
+];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -14,10 +24,10 @@ const Header = () => {
     setIsMenuOpen((prevIsMenuOpen) => !prevIsMenuOpen);
   };
   return (
-    <header className="w-full items-center bg-[#4d40ab] p-6 text-sm text-white md:flex md:items-center md:justify-evenly">
+    <header className="bg-custompurple w-full items-center p-6 text-sm text-white md:flex md:items-center md:justify-evenly">
       {/*Logo*/}
       <div className="flex items-center justify-between">
-        <Link href={"/"}>
+        <Link href="/">
           <Image src={logo} alt="logo" width={70} />
         </Link>
         <button

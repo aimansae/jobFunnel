@@ -1,15 +1,20 @@
 "use client";
 import { IoIosArrowDown } from "react-icons/io";
 import React, { useState } from "react";
-import { JobFunnel } from "../../types";
+import { JobFunnel } from "../types";
 import CountryFlag from "./CountryFlag";
-import { getCountryNames } from "../utils/getData";
+import { sites } from "../sites";
 
 const Accordion = ({ jobs }: { jobs: JobFunnel[] }) => {
   const [expanded, setExpanded] = useState<string | null>(null);
 
   const toggleButton = (jobId: string) => {
     setExpanded((prevJobId) => (prevJobId === jobId ? null : jobId));
+  };
+  const getCountryNames = (siteIds: string[]): string[] => {
+    return siteIds
+      .map((siteId) => sites.find((site) => site.id === siteId)?.country)
+      .filter((country) => country !== undefined) as string[];
   };
 
   return (
