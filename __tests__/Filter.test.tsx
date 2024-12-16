@@ -92,6 +92,7 @@ describe("Filter Component", () => {
       handleFilterChange: jest.fn(),
       handleFilterVisibility: jest.fn(),
       toggleMobileFilters: false,
+      countFilters: 1,
     });
 
     // Render the component
@@ -99,8 +100,7 @@ describe("Filter Component", () => {
     const toggleButton = screen.getByText("Filter");
     userEvent.click(toggleButton);
     // Verify filter count
-    const filterCount = screen.getByTestId("filter-count");
-    console.log(filterCount);
+    const filterCount = await screen.findByTestId("filter-count");
     expect(filterCount).toBeInTheDocument();
     expect(filterCount).toHaveTextContent("1");
   });
