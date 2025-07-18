@@ -2,8 +2,11 @@
 
 This is a responsive, filterable job listing panel built with React and Next.js. It was developed as part of a personal project inspired by a task from my mentor, Amal, at Instapro.
 
-Live Site: Coming Soon
-GitHub Repo: Coming Soon
+
+![Responsive Preview](/public/assets/amIResponsive.PNG)
+
+Live Site deployed on vercel can be found [here](https://job-funnel-ksgv.vercel.app/)  
+GitHub Repo can be found [here](https://github.com/aimansae/jobFunnel) 
 
 ## Overview
 
