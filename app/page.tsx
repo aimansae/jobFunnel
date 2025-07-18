@@ -12,7 +12,6 @@ const Home = async (props: {
   searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
 }) => {
   const searchParams = await props.searchParams;
-  console.log("LOGGING PARAMS on PAGE", searchParams);
   const resolvedParams = await Promise.resolve(searchParams);
   const searchQuery =
     typeof resolvedParams?.search === "string"

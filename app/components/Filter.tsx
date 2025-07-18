@@ -17,12 +17,11 @@ const Filter = () => {
     countFilters,
   } = useSearchAndFilterParams();
 
-  const [toggleMobileFilters, setToggleMobileFilters] = useState(true);
+  const [toggleMobileFilters, setToggleMobileFilters] = useState(false);
 
   const mobileFilterView = () => {
     setToggleMobileFilters((prev) => !prev);
   };
-  console.log("Count FilterSSSs:", countFilters);
 
   return (
     <div className="relative p-4 md:m-0" data-testid="filter">
@@ -54,7 +53,7 @@ const Filter = () => {
         {countFilters > 0 && (
           <span
             data-testid="filter-count"
-            className="bg-custompurple absolute left-[5rem] top-[1rem] z-50 ml-1 rounded-full border px-1 text-center text-xs text-white"
+            className="bg-customPurple absolute left-[5rem] top-[1rem] z-50 ml-1 rounded-full border px-1 text-center text-xs text-white"
           >
             {countFilters}
           </span>

@@ -45,7 +45,6 @@ describe("Search component", () => {
       .map(([value]) => value)
       .join("");
 
-    console.log("Final Input Value:", finalInputValue);
     expect(finalInputValue).toBe("jobs");
     expect(mockHandleSearchChange).toHaveBeenCalledTimes(4);
   });

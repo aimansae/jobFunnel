@@ -1,36 +1,96 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Job Funnel App
+
+This is a responsive, filterable job listing panel built with React and Next.js. It was developed as part of a personal project inspired by a task from my mentor, Amal, at Instapro.
+
+Live Site: Coming Soon
+GitHub Repo: Coming Soon
+
+## Overview
+
+The app allows users to filter job funnels dynamically based on various attributes like category, status, and country. It features:
+
+- Checkbox-based filtering
+- Collapsible (accordion-style) filter sections
+- URL parameter synchronization
+- Mobile-first responsive design
+- Unit testing with Jest & React Testing Library
+
+This project helped me explore better UX for filters, state synchronization, and writing testable components in React.
+
+## Features
+
+- Category, Status, and Country filters (with optional flag icons)
+- Expandable accordion sections for better filter organization
+- Dynamic filter badge count to highlight active filters
+- Mobile-friendly design with an expandable filter panel
+- Custom useSearchAndFilterParams hook to sync filter state with URL
+- Accessibility-friendly components
+- Unit tests for critical components
+
+## What I Learned
+
+- Building filter UIs using controlled components and custom hooks
+- Managing URL query parameters and keeping UI state in sync
+- Creating mobile-first, accessible, and collapsible interfaces
+- Writing modular, reusable, and testable components
+- Simulating user behavior and props in unit tests using Jest
 
 ## Getting Started
 
-First, run the development server:
+1. Clone the repository
 
-```bash
+git clone https://github.com/yourusername/job-funnel-app
+cd job-funnel-app
+
+2. Install dependencies
+
+npm install
+
+3. Run the development server
+
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Visit http://localhost:3000 in your browser to explore the app.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Search & Filtering Logic
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+The application processes query parameters from the URL using searchParams. Filtering is applied as follows:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- search: Filters jobs by name (case-insensitive)
+- category: Matches the job type
+- status: Matches against questionTree.status
+- country: Maps selected countries via siteIds and site.country
 
-## Learn More
+## Technologies Used
 
-To learn more about Next.js, take a look at the following resources:
+- [**React**](https://react.dev/) – JavaScript library for building user interfaces
+- [**Next.js**](https://nextjs.org/) – React framework with built-in routing and server-side rendering
+- [**TypeScript**](https://www.typescriptlang.org/) – Typed superset of JavaScript for scalable development
+- [**Tailwind CSS**](https://tailwindcss.com/) – Utility-first CSS framework for rapid UI development
+- [**React Icons**](https://react-icons.github.io/react-icons/) – Popular icon packs as React components
+- [**Jest**](https://jestjs.io/) + [**React Testing Library**](https://testing-library.com/) – For unit testing and accessible test practices
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Testing
+This project includes unit tests written with Jest and React Testing Library.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+**Run Tests**
 
-## Deploy on Vercel
+npm run test
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Tested Components:
+Accordion, Checkbox, CountryFlag, Filter, Header, Label, Search and SubHeader
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Deployment
+
+Deploy this project with Vercel:
+
+- Connect your GitHub repository to Vercel
+- Set the build command: npm run build
+- Set the output directory: .next
+
+## Future Enhancements
+ 
+- Pagination for large job datasets
+- Persist filter state in localStorage
+- Add user authentication
+- Improve accessibility and mobile UX further
+
